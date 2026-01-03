@@ -7,6 +7,7 @@ import logging
 import os
 import sys
 import tempfile
+from pathlib import Path
 from typing import Optional
 
 ALL_TARGETS = ("vscode", "codex", "claude", "intellij")
@@ -14,20 +15,20 @@ ALL_TARGETS = ("vscode", "codex", "claude", "intellij")
 CONFIG = {
     "destinations": {
         "claude": {
-            "base": "~/.claude",
+            "base": Path.home() / ".claude",
             "agents": "agents",
             "skills": "skills",
             "prompts": "commands",
         },
         "codex": {
-            "base": "~/.codex",
+            "base": Path.home() / ".codex",
             "env": "CODEX_HOME",
             "agents": "agents",
             "skills": "skills",
             "prompts": "prompts",
         },
         "intellij": {
-            "base": "~/.config/github-copilot/intellij",
+            "base": Path.home() / ".config" / "github-copilot" / "intellij",
             "agents": ".",
             "skills": None,
             "prompts": ".",
@@ -37,27 +38,28 @@ CONFIG = {
             },
         },
         "vscode": {
-            "base": "~/Library/Application Support/Code/User",
+            "base": Path.home() / "Library" / "Application Support" / "Code" / "User",
+            "env": "VSCODE_USER_DATA",
             "agents": "prompts",
             "skills": None,
             "prompts": "prompts",
         },
     },
     "sources": {
-        "agents": [".github", "agents"],
-        "commit": [".github", "instructions", "global-git-commit-instructions.md"],
-        "copilot": [".github", "copilot-instructions.md"],
-        "instructions": [".github", "instructions"],
-        "prompts": [".github", "prompts"],
-        "skills": [".github", "skills"],
+        "agents": Path(".github") / "agents",
+        "commit": Path(".github")
+        / "instructions"
+        / "global-git-commit-instructions.md",
+        "copilot": Path(".github") / "copilot-instructions.md",
+        "instructions": Path(".github") / "instructions",
+        "prompts": Path(".github") / "prompts",
+        "skills": Path(".github") / "skills",
     },
     "vscode": {
         "settings-keys": {
-            "commit-instructions": "github.copilot.chat.commitMessageGeneration.instructions",
-            "instructions-locations": "chat.instructionsFilesLocations",
-            "prompt-locations": "chat.promptFilesLocations",
+            "commit-message-generation-instructions": "github.copilot.chat.commitMessageGeneration.instructions",
+            "instructions-files-locations": "chat.instructionsFilesLocations",
         },
-        "settings-path": ["Library", "Application Support", "Code", "User", "settings.json"],
     },
 }
 
@@ -67,11 +69,11 @@ def setup_logger() -> logging.Logger:
     return logging.getLogger(__name__)
 
 
-def get_repo_dir() -> str:
-    return os.path.dirname(os.path.abspath(__file__))
+def get_repo_dir() -> Path:
+    return Path(__file__).parent.resolve()
 
 
-def get_source_path(repo_dir: str, key: str) -> str:
+def get_source_path(repo_dir: Path, key: str) -> Path:
     """
     Get absolute path for a source file/directory.
 
@@ -79,10 +81,10 @@ def get_source_path(repo_dir: str, key: str) -> str:
     :param key: Source key in CONFIG
     :returns: Absolute path
     """
-    return os.path.join(repo_dir, *CONFIG["sources"][key])
+    return repo_dir / CONFIG["sources"][key]
 
 
-def get_dest_base(tool_config: dict) -> str:
+def get_dest_base(tool_config: dict) -> Path:
     """
     Get base directory for a tool, respecting env var.
 
@@ -91,22 +93,24 @@ def get_dest_base(tool_config: dict) -> str:
     """
     env_var = tool_config.get("env")
     if env_var and os.environ.get(env_var):
-        return os.environ[env_var]
-    return os.path.expanduser(tool_config["base"])
+        return Path(os.environ[env_var])
+    return tool_config["base"]
 
 
-def get_vscode_settings_path(home_dir: str) -> tuple[str, str]:
+def get_vscode_settings_path() -> tuple[Path, Path]:
     """
     Get VS Code settings.json path.
 
-    :param home_dir: User home directory
     :returns: Tuple of (settings_path, settings_dir)
     """
-    settings_path = os.path.join(home_dir, *CONFIG["vscode"]["settings-path"])
-    return settings_path, os.path.dirname(settings_path)
+    base_dir = get_dest_base(CONFIG["destinations"]["vscode"])
+    settings_path = base_dir / "settings.json"
+    return settings_path, base_dir
 
 
-def ensure_settings_file(settings_path: str, settings_dir: str, logger: logging.Logger) -> None:
+def ensure_settings_file(
+    settings_path: Path, settings_dir: Path, logger: logging.Logger
+) -> None:
     """
     Ensure settings file exists.
 
@@ -114,14 +118,13 @@ def ensure_settings_file(settings_path: str, settings_dir: str, logger: logging.
     :param settings_dir: Directory containing settings.json
     :param logger: Logger instance
     """
-    os.makedirs(settings_dir, exist_ok=True)
-    if not os.path.exists(settings_path) or os.path.getsize(settings_path) == 0:
-        with open(settings_path, "w", encoding="utf-8") as f:
-            f.write("{}\n")
+    settings_dir.mkdir(parents=True, exist_ok=True)
+    if not settings_path.exists() or settings_path.stat().st_size == 0:
+        settings_path.write_text("{}\n", encoding="utf-8")
         logger.info("Initialized settings file: %s", settings_path)
 
 
-def load_settings(settings_path: str) -> Optional[dict]:
+def load_settings(settings_path: Path) -> Optional[dict]:
     """
     Load settings from JSON file.
 
@@ -129,14 +132,15 @@ def load_settings(settings_path: str) -> Optional[dict]:
     :returns: Parsed settings dict or None on error
     """
     try:
-        with open(settings_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        return json.loads(settings_path.read_text(encoding="utf-8"))
     except (ValueError, FileNotFoundError) as e:
         print(f"Error loading settings: {e}", file=sys.stderr)
         return None
 
 
-def write_settings(settings_path: str, settings_dir: str, data: dict, logger: logging.Logger) -> None:
+def write_settings(
+    settings_path: Path, settings_dir: Path, data: dict, logger: logging.Logger
+) -> None:
     """
     Write settings to JSON file atomically.
 
@@ -145,16 +149,19 @@ def write_settings(settings_path: str, settings_dir: str, data: dict, logger: lo
     :param data: Settings data to write
     :param logger: Logger instance
     """
-    fd, tmp_path = tempfile.mkstemp(prefix="settings.", suffix=".json", dir=settings_dir)
+    fd, tmp_path = tempfile.mkstemp(
+        prefix="settings.", suffix=".json", dir=settings_dir
+    )
     os.close(fd)
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=True)
-        f.write("\n")
-    os.replace(tmp_path, settings_path)
+    tmp_file = Path(tmp_path)
+    tmp_file.write_text(
+        json.dumps(data, indent=2, ensure_ascii=True) + "\n", encoding="utf-8"
+    )
+    tmp_file.replace(settings_path)
     logger.info("Updated settings file: %s", settings_path)
 
 
-def update_vscode_settings(data: dict, repo_dir: str, logger: logging.Logger) -> bool:
+def update_vscode_settings(data: dict, repo_dir: Path, logger: logging.Logger) -> bool:
     """
     Update VS Code settings.json with repo paths.
 
@@ -165,27 +172,29 @@ def update_vscode_settings(data: dict, repo_dir: str, logger: logging.Logger) ->
     """
     keys = CONFIG["vscode"]["settings-keys"]
 
-    instructions_dir = get_source_path(repo_dir, "instructions")
-    instructions_locations = data.setdefault(keys["instructions-locations"], {})
+    instructions_dir = str(get_source_path(repo_dir, "instructions"))
+    instructions_locations = data.setdefault(keys["instructions-files-locations"], {})
     instructions_locations[instructions_dir] = True
 
-    agents_dir = get_source_path(repo_dir, "agents")
-    prompts_dir = get_source_path(repo_dir, "prompts")
-    prompt_locations = data.setdefault(keys["prompt-locations"], {})
-    prompt_locations[agents_dir] = True
-    prompt_locations[prompts_dir] = True
-
-    commit_file = get_source_path(repo_dir, "commit")
+    commit_file = str(get_source_path(repo_dir, "commit"))
     entry = {"file": commit_file}
-    commit_instructions = data.setdefault(keys["commit-instructions"], [])
-    if not any(item.get("file") == commit_file for item in commit_instructions if isinstance(item, dict)):
+    commit_instructions = data.setdefault(
+        keys["commit-message-generation-instructions"], []
+    )
+    if not any(
+        item.get("file") == commit_file
+        for item in commit_instructions
+        if isinstance(item, dict)
+    ):
         commit_instructions.append(entry)
 
     logger.info("Updated VS Code settings for repo: %s", repo_dir)
     return True
 
 
-def backup_and_link(dest_path: str, backup_dir: str, source_path: str, logger: logging.Logger) -> None:
+def backup_and_link(
+    dest_path: Path, backup_dir: Path, source_path: Path, logger: logging.Logger
+) -> None:
     """
     Backup existing file and create symlink.
 
@@ -194,20 +203,20 @@ def backup_and_link(dest_path: str, backup_dir: str, source_path: str, logger: l
     :param source_path: Source file to link to
     :param logger: Logger instance
     """
-    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-    if os.path.exists(dest_path) or os.path.islink(dest_path):
-        os.makedirs(backup_dir, exist_ok=True)
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    if dest_path.exists() or dest_path.is_symlink():
+        backup_dir.mkdir(parents=True, exist_ok=True)
         timestamp = datetime.datetime.now().strftime("%Y-%m-%dT-%H-%M-%S")
-        backup_name = os.path.basename(dest_path).replace(".md", f".{timestamp}.md")
-        os.replace(dest_path, os.path.join(backup_dir, backup_name))
+        backup_name = dest_path.name.replace(".md", f".{timestamp}.md")
+        dest_path.replace(backup_dir / backup_name)
         logger.info("Backed up %s", dest_path)
-    if os.path.islink(dest_path) or os.path.exists(dest_path):
-        os.remove(dest_path)
-    os.symlink(source_path, dest_path)
+    if dest_path.is_symlink() or dest_path.exists():
+        dest_path.unlink()
+    dest_path.symlink_to(source_path)
     logger.info("Linked %s -> %s", dest_path, source_path)
 
 
-def link_intellij_instructions(repo_dir: str, logger: logging.Logger) -> None:
+def link_intellij_instructions(repo_dir: Path, logger: logging.Logger) -> None:
     """
     Link instructions files to IntelliJ Copilot directory.
 
@@ -219,19 +228,19 @@ def link_intellij_instructions(repo_dir: str, logger: logging.Logger) -> None:
         return
 
     base_dir = get_dest_base(intellij_config)
-    backup_dir = os.path.join(base_dir, "backup")
+    backup_dir = base_dir / "backup"
     instructions_map = intellij_config["instructions"]
 
     for source_key, target_name in instructions_map.items():
         source_path = get_source_path(repo_dir, source_key)
-        if not os.path.exists(source_path):
+        if not source_path.exists():
             print(f"Missing source: {source_path}", file=sys.stderr)
             continue
-        dest_path = os.path.join(base_dir, target_name)
+        dest_path = base_dir / target_name
         backup_and_link(dest_path, backup_dir, source_path, logger)
 
 
-def get_dest_paths(asset_type: str, targets: set[str]) -> list[str]:
+def get_dest_paths(asset_type: str, targets: set[str]) -> list[Path]:
     """
     Get destination paths for an asset type.
 
@@ -247,12 +256,16 @@ def get_dest_paths(asset_type: str, targets: set[str]) -> list[str]:
         if subdir is None:
             continue
         base = get_dest_base(tool_config)
-        paths.append(base if subdir == "." else os.path.join(base, subdir))
+        paths.append(base if subdir == "." else base / subdir)
     return paths
 
 
 def link_assets(
-    src_dir: str, asset_type: str, is_directory: bool, logger: logging.Logger, targets: set[str]
+    src_dir: Path,
+    asset_type: str,
+    is_directory: bool,
+    logger: logging.Logger,
+    targets: set[str],
 ) -> None:
     """
     Link assets to destination directories.
@@ -263,22 +276,21 @@ def link_assets(
     :param logger: Logger instance
     :param targets: Set of target tool names to include
     """
-    if not os.path.isdir(src_dir):
+    if not src_dir.is_dir():
         return
     dest_paths = get_dest_paths(asset_type, targets)
-    for name in sorted(os.listdir(src_dir)):
-        src_path = os.path.join(src_dir, name)
-        if is_directory and not os.path.isdir(src_path):
+    for src_path in sorted(src_dir.iterdir()):
+        if is_directory and not src_path.is_dir():
             continue
-        if not is_directory and (not os.path.isfile(src_path) or not name.endswith(".md")):
+        if not is_directory and (not src_path.is_file() or src_path.suffix != ".md"):
             continue
         for dest_dir in dest_paths:
-            os.makedirs(dest_dir, exist_ok=True)
-            dest_path = os.path.join(dest_dir, name)
-            if os.path.islink(dest_path) or os.path.exists(dest_path):
-                os.remove(dest_path)
-            os.symlink(src_path, dest_path)
-            logger.info("Linked %s: %s", asset_type[:-1], name)
+            dest_dir.mkdir(parents=True, exist_ok=True)
+            dest_path = dest_dir / src_path.name
+            if dest_path.is_symlink() or dest_path.exists():
+                dest_path.unlink()
+            dest_path.symlink_to(src_path)
+            logger.info("Linked %s: %s", asset_type[:-1], src_path.name)
 
 
 def cleanup_broken_links(logger: logging.Logger, targets: set[str]) -> None:
@@ -288,7 +300,7 @@ def cleanup_broken_links(logger: logging.Logger, targets: set[str]) -> None:
     :param logger: Logger instance
     :param targets: Set of target tool names to include
     """
-    seen = set()
+    seen: set[Path] = set()
     for tool_name, tool_config in CONFIG["destinations"].items():
         if tool_name not in targets:
             continue
@@ -297,15 +309,14 @@ def cleanup_broken_links(logger: logging.Logger, targets: set[str]) -> None:
             subdir = tool_config.get(asset_type)
             if subdir is None:
                 continue
-            dest_dir = base if subdir == "." else os.path.join(base, subdir)
-            if dest_dir in seen or not os.path.isdir(dest_dir):
+            dest_dir = base if subdir == "." else base / subdir
+            if dest_dir in seen or not dest_dir.is_dir():
                 continue
             seen.add(dest_dir)
-            for name in os.listdir(dest_dir):
-                dest_path = os.path.join(dest_dir, name)
-                if os.path.islink(dest_path) and not os.path.exists(dest_path):
-                    os.remove(dest_path)
-                    logger.info("Removed broken link: %s", name)
+            for dest_path in dest_dir.iterdir():
+                if dest_path.is_symlink() and not dest_path.exists():
+                    dest_path.unlink()
+                    logger.info("Removed broken link: %s", dest_path.name)
 
 
 def parse_args() -> argparse.Namespace:
@@ -314,7 +325,9 @@ def parse_args() -> argparse.Namespace:
 
     :returns: Parsed arguments
     """
-    parser = argparse.ArgumentParser(description="Setup agent configurations for various tools.")
+    parser = argparse.ArgumentParser(
+        description="Setup agent configurations for various tools."
+    )
     parser.add_argument(
         "targets",
         nargs="*",
@@ -327,7 +340,9 @@ def parse_args() -> argparse.Namespace:
     else:
         invalid = set(args.targets) - set(ALL_TARGETS)
         if invalid:
-            parser.error(f"invalid target(s): {', '.join(invalid)} (choose from {', '.join(ALL_TARGETS)})")
+            parser.error(
+                f"invalid target(s): {', '.join(invalid)} (choose from {', '.join(ALL_TARGETS)})"
+            )
     return args
 
 
@@ -342,10 +357,9 @@ def main() -> int:
 
     logger = setup_logger()
     repo_dir = get_repo_dir()
-    home_dir = os.path.expanduser("~")
 
     if "vscode" in targets:
-        settings_path, settings_dir = get_vscode_settings_path(home_dir)
+        settings_path, settings_dir = get_vscode_settings_path()
         ensure_settings_file(settings_path, settings_dir, logger)
         data = load_settings(settings_path)
         if data is None:
@@ -356,9 +370,10 @@ def main() -> int:
     if "intellij" in targets:
         link_intellij_instructions(repo_dir, logger)
 
-    link_assets(get_source_path(repo_dir, "skills"), "skills", is_directory=True, logger=logger, targets=targets)
-    link_assets(get_source_path(repo_dir, "prompts"), "prompts", is_directory=False, logger=logger, targets=targets)
-    link_assets(get_source_path(repo_dir, "agents"), "agents", is_directory=False, logger=logger, targets=targets)
+    for asset_type, is_dir in [("skills", True), ("prompts", False), ("agents", False)]:
+        link_assets(
+            get_source_path(repo_dir, asset_type), asset_type, is_dir, logger, targets
+        )
 
     cleanup_broken_links(logger, targets)
     return 0
