@@ -45,13 +45,11 @@ python setup-agents.py
 | ---------------------- | ----------- | ---------------- |
 | [code-reviewer]        | Code review | git, serena      |
 | [test-generator]       | Test gen    | serena, context7 |
-| [security-analyzer]    | Security    | serena, ripgrep  |
 | [documentation-writer] | Docs        | serena, context7 |
 | [refactoring-expert]   | Refactoring | serena, git      |
 
 [code-reviewer]: .github/agents/code-reviewer.agent.md
 [test-generator]: .github/agents/test-generator.agent.md
-[security-analyzer]: .github/agents/security-analyzer.agent.md
 [documentation-writer]: .github/agents/documentation-writer.agent.md
 [refactoring-expert]: .github/agents/refactoring-expert.agent.md
 

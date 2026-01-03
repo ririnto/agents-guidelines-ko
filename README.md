@@ -45,13 +45,11 @@ python setup-agents.py
 | ---------------------- | ----------- | ---------------- |
 | [code-reviewer]        | 코드 리뷰   | git, serena      |
 | [test-generator]       | 테스트 생성 | serena, context7 |
-| [security-analyzer]    | 보안 분석   | serena, ripgrep  |
 | [documentation-writer] | 문서 생성   | serena, context7 |
 | [refactoring-expert]   | 리팩토링    | serena, git      |
 
 [code-reviewer]: .github/agents/code-reviewer.agent.md
 [test-generator]: .github/agents/test-generator.agent.md
-[security-analyzer]: .github/agents/security-analyzer.agent.md
 [documentation-writer]: .github/agents/documentation-writer.agent.md
 [refactoring-expert]: .github/agents/refactoring-expert.agent.md
 

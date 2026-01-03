@@ -7,27 +7,18 @@ import logging
 import os
 import sys
 import tempfile
+from typing import Optional
 
 ALL_TARGETS = ("vscode", "codex", "claude", "intellij")
 
 CONFIG = {
-    "vscode": {
-        "settings-path": ["Library", "Application Support", "Code", "User", "settings.json"],
-        "settings-keys": {
-            "instructions-locations": "chat.instructionsFilesLocations",
-            "prompt-locations": "chat.promptFilesLocations",
-            "commit-instructions": "github.copilot.chat.commitMessageGeneration.instructions",
-        },
-    },
-    "sources": {
-        "instructions": [".github", "instructions"],
-        "copilot": [".github", "copilot-instructions.md"],
-        "commit": [".github", "instructions", "global-git-commit-instructions.md"],
-        "skills": [".github", "skills"],
-        "prompts": [".github", "prompts"],
-        "agents": [".github", "agents"],
-    },
     "destinations": {
+        "claude": {
+            "base": "~/.claude",
+            "agents": "agents",
+            "skills": "skills",
+            "prompts": "commands",
+        },
         "codex": {
             "base": "~/.codex",
             "env": "CODEX_HOME",
@@ -35,22 +26,38 @@ CONFIG = {
             "skills": "skills",
             "prompts": "prompts",
         },
-        "claude": {
-            "base": "~/.claude",
-            "agents": "agents",
-            "skills": "skills",
-            "prompts": "commands",
-        },
         "intellij": {
             "base": "~/.config/github-copilot/intellij",
             "agents": ".",
             "skills": None,
             "prompts": ".",
             "instructions": {
-                "copilot": "global-copilot-instructions.md",
                 "commit": "global-git-commit-instructions.md",
+                "copilot": "global-copilot-instructions.md",
             },
         },
+        "vscode": {
+            "base": "~/Library/Application Support/Code/User",
+            "agents": "prompts",
+            "skills": None,
+            "prompts": "prompts",
+        },
+    },
+    "sources": {
+        "agents": [".github", "agents"],
+        "commit": [".github", "instructions", "global-git-commit-instructions.md"],
+        "copilot": [".github", "copilot-instructions.md"],
+        "instructions": [".github", "instructions"],
+        "prompts": [".github", "prompts"],
+        "skills": [".github", "skills"],
+    },
+    "vscode": {
+        "settings-keys": {
+            "commit-instructions": "github.copilot.chat.commitMessageGeneration.instructions",
+            "instructions-locations": "chat.instructionsFilesLocations",
+            "prompt-locations": "chat.promptFilesLocations",
+        },
+        "settings-path": ["Library", "Application Support", "Code", "User", "settings.json"],
     },
 }
 
@@ -114,7 +121,7 @@ def ensure_settings_file(settings_path: str, settings_dir: str, logger: logging.
         logger.info("Initialized settings file: %s", settings_path)
 
 
-def load_settings(settings_path: str) -> dict | None:
+def load_settings(settings_path: str) -> Optional[dict]:
     """
     Load settings from JSON file.
 
