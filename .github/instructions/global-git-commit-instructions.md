@@ -9,13 +9,17 @@ excludeAgent:
 
 ## OUTPUT LANGUAGE (MANDATORY)
 
-- The final commit message MUST be written in Korean for all natural-language parts (header description, body, footer).
-- English is allowed ONLY for: protected identifiers, whitelist items, code keywords, paths, text in backticks, and anything inside code blocks.
-- Output ONLY the final commit message text. Do NOT output explanations or meta commentary.
+- The final commit message MUST be written in Korean
+  for all natural-language parts (header description, body, footer).
+- English is allowed ONLY for: protected identifiers, whitelist items,
+  code keywords, paths, text in backticks, and anything inside code blocks.
+- Output ONLY the final commit message text.
+  Do NOT output explanations or meta commentary.
 
 ## CLEAN OUTPUT (MANDATORY)
 
-- Do not write internal tool traces, opaque placeholders, or assistant/meta notes into any commits.
+- Do not write internal tool traces, opaque placeholders,
+  or assistant/meta notes into any commits.
 
 ## FORMAT (MANDATORY)
 
@@ -28,6 +32,7 @@ Conventional Commits structure is:
 (Keep this structure exactly.)
 
 Allowed `type` values (exact):
+
 `feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`
 
 Rules:
@@ -41,7 +46,9 @@ Rules:
   - no trailing period
 - If body/footer exists, separate sections with blank lines.
 - Breaking changes:
-  - mark with `!` in the header and/or add `BREAKING CHANGE:` in the footer (keep `BREAKING CHANGE:` as-is).
+  - mark with `!` in the header
+    and/or add `BREAKING CHANGE:` in the footer
+    (keep `BREAKING CHANGE:` as-is).
 
 ## Examples
 
@@ -70,7 +77,8 @@ Closes #123
 - Description is imperative, concise, and has no trailing period.
 - Scope is used only when it improves clarity.
 - Breaking changes are clearly marked (`!` and/or `BREAKING CHANGE:`).
-- If body/footer exists, separate sections with blank lines in the final message.
+- If body/footer exists, separate sections with blank lines
+  in the final message.
 - Korean output rules and preservation rules are respected.
 
 ## Context-aware commit messages
@@ -79,11 +87,13 @@ When writing commit messages, Claude will:
 
 1. **Look at recent git history** to maintain consistent style and context
 2. **Analyze the diff** to capture all meaningful changes
-3. **Reference related issues/PRs** when applicable (e.g., `Closes #123`, `Fixes #456`)
+3. **Reference related issues/PRs** when applicable
+   (e.g., `Closes #123`, `Fixes #456`)
 
 ## Instruction applicability fallback
 
-- If custom instructions are not fully applied in the current Copilot surface, restate only the minimal relevant rules inline.
+- If custom instructions are not fully applied in the current Copilot surface,
+  restate only the minimal relevant rules inline.
 
 ---
 
@@ -102,9 +112,14 @@ Do not translate:
 
 ### Protected Terms (Compact)
 
-**Core**: Git, commit, branch, merge, rebase, push, pull, fetch, stash, cherry-pick, HEAD, origin
-**Types**: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert, BREAKING CHANGE
-**Tech**: API, SDK, REST, GraphQL, Spring, JPA, Docker, Kubernetes, AWS, transaction, cache, async, sync
+**Core**: Git, commit, branch, merge, rebase, push, pull,
+fetch, stash, cherry-pick, HEAD, origin
+
+**Types**: feat, fix, docs, style, refactor, perf, test,
+build, ci, chore, revert, BREAKING CHANGE
+
+**Tech**: API, SDK, REST, GraphQL, Spring, JPA, Docker,
+Kubernetes, AWS, transaction, cache, async, sync
 
 ### Output Rule
 

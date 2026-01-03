@@ -1,7 +1,7 @@
 ---
 name: conventional-commit
-description: Generate Conventional Commit messages from git changes. Use when committing code changes or when the user needs to write commit messages.
-compatibility: Requires git CLI or git MCP, and a working git repository with changes (staged or unstaged).
+description: 'Generate Conventional Commit messages by analyzing git diffs. Use when committing code changes, when the user needs to write commit messages, or after staging changes.'
+compatibility: 'Requires git CLI or git MCP, and a working git repository with changes (staged or unstaged).'
 allowed-tools:
   - Bash(git:*)
   - Read
@@ -20,8 +20,10 @@ Use this skill when:
 
 ## OUTPUT LANGUAGE (MANDATORY)
 
-- Final commit message MUST be written in Korean for all natural-language parts
-- English is allowed ONLY for: protected identifiers, code keywords, paths, backtick content, code blocks
+- Final commit message MUST be written in Korean
+  for all natural-language parts
+- English is allowed ONLY for: protected identifiers, code keywords,
+  paths, backtick content, code blocks
 - Output ONLY the final commit message. No explanations or meta commentary.
 
 ## FORMAT
@@ -35,6 +37,7 @@ Conventional Commits structure:
 ```
 
 Allowed `type` values:
+
 `feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`
 
 Rules:
@@ -42,12 +45,14 @@ Rules:
 - Header: `type(scope): description` or `type: description`
 - `scope` is optional; use only when it improves clarity
 - `description`: Korean, imperative mood, concise, no trailing period
-- Breaking changes: mark with `!` in header and/or `BREAKING CHANGE:` in footer
+- Breaking changes: mark with `!` in header
+  and/or `BREAKING CHANGE:` in footer
 
 ## Workflow
 
 1. If diffs are already in context, skip git commands
-2. Otherwise: `git status` → `git diff` / `git diff --cached` → generate message
+2. Otherwise: `git status` → `git diff` / `git diff --cached`
+   → generate message
 
 ## Examples
 
@@ -88,3 +93,7 @@ Do not translate:
 - Paths with `.` `/` `[]`
 - ALL_CAPS acronyms (API, SDK, etc.)
 - Framework/library proper nouns
+
+## Notes
+
+- MCP tools are optional; omit if unavailable or add others as needed

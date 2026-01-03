@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup Agents (All)",
+      "type": "shell",
+      "command": "python3",
+      "args": ["${workspaceFolder}/setup-agents.py"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Setup Agents (VS Code)",
+      "type": "shell",
+      "command": "python3",
+      "args": ["${workspaceFolder}/setup-agents.py", "vscode"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Setup Agents (Codex)",
+      "type": "shell",
+      "command": "python3",
+      "args": ["${workspaceFolder}/setup-agents.py", "codex"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Setup Agents (Claude)",
+      "type": "shell",
+      "command": "python3",
+      "args": ["${workspaceFolder}/setup-agents.py", "claude"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Setup Agents (IntelliJ)",
+      "type": "shell",
+      "command": "python3",
+      "args": ["${workspaceFolder}/setup-agents.py", "intellij"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
