@@ -105,6 +105,14 @@ When an MCP tool call fails or times out:
 3. If all alternatives fail, explain what was attempted
    and ask for guidance
 
+### Visualization
+
+- **Prefer Mermaid** for diagrams, flowcharts, graphs, and visualizations
+- Create diagrams using Mermaid syntax in markdown code blocks
+- Supports: flowcharts, sequence diagrams, class diagrams,
+  ER diagrams, state diagrams, Gantt charts, etc.
+- Fallback: Use ASCII art or structured text if Mermaid is insufficient
+
 ### Terminal Rules
 
 - Save to file (using IDE or tools) + use IDE runners
