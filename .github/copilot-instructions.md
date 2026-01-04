@@ -110,6 +110,10 @@ When an MCP tool call fails or times out:
 - Save to file (using IDE or tools) + use IDE runners
   instead of `python -c "..."` or `node -e "..."`
 - For large inputs (>1KB): write to temp file first, then pipe/redirect
+- **macOS caveat**: Some Linux commands may not work as expected
+  (e.g., `sed -i`, `grep -P`, `readlink -f`, `cat -A`,
+  `date -d`, `stat -c`, `find -printf`, `xargs -r`, `sort -V`).
+  Use macOS-compatible alternatives or check `uname` first.
 
 ## Iterative Processing
 
