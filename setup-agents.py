@@ -289,13 +289,15 @@ def copy_assets(
             dest_dir.mkdir(parents=True, exist_ok=True)
             dest_path = dest_dir / src_path.name
             # Remove existing destination (file, directory, or symlink)
-            if dest_path.exists() or dest_path.is_symlink():
-                if dest_path.is_dir() and not dest_path.is_symlink():
-                    # Regular directory - remove tree
-                    shutil.rmtree(dest_path)
-                else:
-                    # File or symlink - remove single entry
-                    dest_path.unlink()
+            if dest_path.is_symlink():
+                # Symlink (may be broken) - remove it
+                dest_path.unlink()
+            elif dest_path.is_dir():
+                # Regular directory - remove tree
+                shutil.rmtree(dest_path)
+            elif dest_path.exists():
+                # Regular file - remove it
+                dest_path.unlink()
             if is_directory:
                 shutil.copytree(src_path, dest_path)
             else:
@@ -303,7 +305,7 @@ def copy_assets(
             logger.info("Copied %s: %s", asset_type[:-1], src_path.name)
 
 
-def cleanup_old_files(logger: logging.Logger, targets: set[str]) -> None:
+def cleanup_old_symlinks(logger: logging.Logger, targets: set[str]) -> None:
     """
     Remove old symlinks from all destination directories.
 
@@ -385,7 +387,7 @@ def main() -> int:
             get_source_path(repo_dir, asset_type), asset_type, is_dir, logger, targets
         )
 
-    cleanup_old_files(logger, targets)
+    cleanup_old_symlinks(logger, targets)
     return 0
 
 
