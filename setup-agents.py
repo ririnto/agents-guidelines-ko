@@ -288,10 +288,13 @@ def copy_assets(
         for dest_dir in dest_paths:
             dest_dir.mkdir(parents=True, exist_ok=True)
             dest_path = dest_dir / src_path.name
-            if dest_path.is_symlink() or dest_path.exists():
+            # Remove existing destination (file, directory, or symlink)
+            if dest_path.exists() or dest_path.is_symlink():
                 if dest_path.is_dir() and not dest_path.is_symlink():
+                    # Regular directory - remove tree
                     shutil.rmtree(dest_path)
                 else:
+                    # File or symlink - remove single entry
                     dest_path.unlink()
             if is_directory:
                 shutil.copytree(src_path, dest_path)
