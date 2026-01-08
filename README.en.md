@@ -120,7 +120,7 @@ After installation, instructions apply automatically in Copilot Chat.
 
 1. Edit `.md` files
 2. Re-run `python setup-agents.py`
-   (symlinks auto-reflect changes)
+   (files are copied, so re-run needed to apply changes)
 
 ### Add New Skill
 

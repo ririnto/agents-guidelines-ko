@@ -119,7 +119,7 @@ python setup-agents.py
 ### 지침 수정
 
 1. `.md` 파일 수정
-2. `python setup-agents.py` 재실행 (심볼릭 링크이므로 자동 반영)
+2. `python setup-agents.py` 재실행 (파일이 복사되므로 변경사항 반영 필요)
 
 ### 새 스킬 추가
 
