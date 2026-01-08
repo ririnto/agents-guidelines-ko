@@ -205,7 +205,8 @@ def backup_and_copy(
     :param logger: Logger instance
     """
     dest_path.parent.mkdir(parents=True, exist_ok=True)
-    # Backup existing file if present
+    # Backup existing file if present (including broken symlinks)
+    # Note: broken symlinks have is_symlink()=True but exists()=False
     if dest_path.exists() or dest_path.is_symlink():
         backup_dir.mkdir(parents=True, exist_ok=True)
         timestamp = datetime.datetime.now().strftime("%Y-%m-%dT-%H-%M-%S")
@@ -291,12 +292,13 @@ def copy_assets(
         for dest_dir in dest_paths:
             dest_dir.mkdir(parents=True, exist_ok=True)
             dest_path = dest_dir / src_path.name
-            # Remove existing destination (file, directory, or symlink)
+            # Remove existing destination before copying
+            # Check is_symlink() first to handle broken symlinks correctly
             if dest_path.is_symlink():
-                # Symlink (may be broken) - remove it
+                # Symlink (may be broken) - just remove the link itself
                 dest_path.unlink()
             elif dest_path.is_dir():
-                # Regular directory - remove tree
+                # Regular directory - remove entire tree
                 shutil.rmtree(dest_path)
             elif dest_path.exists():
                 # Regular file - remove it
