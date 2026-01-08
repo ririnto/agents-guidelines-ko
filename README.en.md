@@ -175,6 +175,30 @@ Terms that should not be translated:
 - Patterns: MVC, DDD, CQRS, etc.
 - Agent terms: Claude, Copilot, MCP, etc.
 
+## References
+
+### Official Documentation
+
+#### GitHub Copilot
+- [Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) - Configure custom instructions for VS Code Copilot
+- [Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills) - Develop Copilot agent skills
+
+#### Claude
+- [Skills Documentation](https://code.claude.com/docs/ko/skills) - Guide to writing Claude skills
+- [Memory Feature](https://code.claude.com/docs/ko/memory) - Using Claude memory
+
+#### OpenAI Codex
+- [Agents.md Guide](https://developers.openai.com/codex/guides/agents-md) - Codex agent configuration
+- [Skills Development](https://developers.openai.com/codex/skills/) - Creating Codex skills
+
+### Community Resources
+
+- [agents.md](https://agents.md/) - Agent configuration standard specification
+- [agentskills/agentskills](https://github.com/agentskills/agentskills) - Collection of agent skills
+- [github/awesome-copilot](https://github.com/github/awesome-copilot) - Awesome Copilot resources
+- [anthropics/skills](https://github.com/anthropics/skills) - Official Anthropic skills
+- [openai/skills](https://github.com/openai/skills) - Official OpenAI skills
+
 ## License
 
 MIT

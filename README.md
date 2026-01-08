@@ -174,6 +174,30 @@ python setup-agents.py
 - 패턴: MVC, DDD, CQRS 등
 - 에이전트: Claude, Copilot, MCP 등
 
+## 참고 자료
+
+### 공식 문서
+
+#### GitHub Copilot
+- [Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) - VS Code Copilot 커스텀 지침 설정
+- [Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills) - Copilot 에이전트 스킬 개발
+
+#### Claude
+- [Skills 문서](https://code.claude.com/docs/ko/skills) - Claude 스킬 작성 가이드
+- [Memory 기능](https://code.claude.com/docs/ko/memory) - Claude 메모리 활용
+
+#### OpenAI Codex
+- [Agents.md 가이드](https://developers.openai.com/codex/guides/agents-md) - Codex 에이전트 설정
+- [Skills 개발](https://developers.openai.com/codex/skills/) - Codex 스킬 작성
+
+### 커뮤니티 리소스
+
+- [agents.md](https://agents.md/) - 에이전트 설정 표준 스펙
+- [agentskills/agentskills](https://github.com/agentskills/agentskills) - 에이전트 스킬 컬렉션
+- [github/awesome-copilot](https://github.com/github/awesome-copilot) - Copilot 리소스 모음
+- [anthropics/skills](https://github.com/anthropics/skills) - Anthropic 공식 스킬
+- [openai/skills](https://github.com/openai/skills) - OpenAI 공식 스킬
+
 ## 라이선스
 
 MIT
