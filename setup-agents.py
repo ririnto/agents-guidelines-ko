@@ -5,6 +5,7 @@ import datetime
 import json
 import logging
 import os
+import shutil
 import sys
 import tempfile
 from pathlib import Path
@@ -192,33 +193,37 @@ def update_vscode_settings(data: dict, repo_dir: Path, logger: logging.Logger) -
     return True
 
 
-def backup_and_link(
+def backup_and_copy(
     dest_path: Path, backup_dir: Path, source_path: Path, logger: logging.Logger
 ) -> None:
     """
-    Backup existing file and create symlink.
+    Backup existing file and copy source file.
 
-    :param dest_path: Destination path for symlink
+    :param dest_path: Destination path for file copy
     :param backup_dir: Directory for backups
-    :param source_path: Source file to link to
+    :param source_path: Source file to copy
     :param logger: Logger instance
     """
     dest_path.parent.mkdir(parents=True, exist_ok=True)
+    # Backup existing file if present (including broken symlinks)
+    # Note: broken symlinks have is_symlink()=True but exists()=False
     if dest_path.exists() or dest_path.is_symlink():
         backup_dir.mkdir(parents=True, exist_ok=True)
         timestamp = datetime.datetime.now().strftime("%Y-%m-%dT-%H-%M-%S")
-        backup_name = dest_path.name.replace(".md", f".{timestamp}.md")
+        # Preserve original extension in backup name
+        if dest_path.suffix:
+            backup_name = dest_path.stem + f".{timestamp}" + dest_path.suffix
+        else:
+            backup_name = dest_path.name + f".{timestamp}"
         dest_path.replace(backup_dir / backup_name)
         logger.info("Backed up %s", dest_path)
-    if dest_path.is_symlink() or dest_path.exists():
-        dest_path.unlink()
-    dest_path.symlink_to(source_path)
-    logger.info("Linked %s -> %s", dest_path, source_path)
+    shutil.copy2(source_path, dest_path)
+    logger.info("Copied %s -> %s", source_path, dest_path)
 
 
-def link_intellij_instructions(repo_dir: Path, logger: logging.Logger) -> None:
+def copy_intellij_instructions(repo_dir: Path, logger: logging.Logger) -> None:
     """
-    Link instructions files to IntelliJ Copilot directory.
+    Copy instructions files to IntelliJ Copilot directory.
 
     :param repo_dir: Repository root directory
     :param logger: Logger instance
@@ -237,7 +242,7 @@ def link_intellij_instructions(repo_dir: Path, logger: logging.Logger) -> None:
             print(f"Missing source: {source_path}", file=sys.stderr)
             continue
         dest_path = base_dir / target_name
-        backup_and_link(dest_path, backup_dir, source_path, logger)
+        backup_and_copy(dest_path, backup_dir, source_path, logger)
 
 
 def get_dest_paths(asset_type: str, targets: set[str]) -> list[Path]:
@@ -260,7 +265,7 @@ def get_dest_paths(asset_type: str, targets: set[str]) -> list[Path]:
     return paths
 
 
-def link_assets(
+def copy_assets(
     src_dir: Path,
     asset_type: str,
     is_directory: bool,
@@ -268,7 +273,7 @@ def link_assets(
     targets: set[str],
 ) -> None:
     """
-    Link assets to destination directories.
+    Copy assets to destination directories.
 
     :param src_dir: Source directory containing assets
     :param asset_type: One of 'agents', 'skills', 'prompts'
@@ -287,15 +292,27 @@ def link_assets(
         for dest_dir in dest_paths:
             dest_dir.mkdir(parents=True, exist_ok=True)
             dest_path = dest_dir / src_path.name
-            if dest_path.is_symlink() or dest_path.exists():
+            # Remove existing destination before copying
+            # Check is_symlink() first to handle broken symlinks correctly
+            if dest_path.is_symlink():
+                # Symlink (may be broken) - just remove the link itself
                 dest_path.unlink()
-            dest_path.symlink_to(src_path)
-            logger.info("Linked %s: %s", asset_type[:-1], src_path.name)
+            elif dest_path.is_dir():
+                # Regular directory - remove entire tree
+                shutil.rmtree(dest_path)
+            elif dest_path.exists():
+                # Regular file - remove it
+                dest_path.unlink()
+            if is_directory:
+                shutil.copytree(src_path, dest_path)
+            else:
+                shutil.copy2(src_path, dest_path)
+            logger.info("Copied %s: %s", asset_type[:-1], src_path.name)
 
 
-def cleanup_broken_links(logger: logging.Logger, targets: set[str]) -> None:
+def cleanup_old_symlinks(logger: logging.Logger, targets: set[str]) -> None:
     """
-    Remove broken symlinks from all destination directories.
+    Remove old symlinks from all destination directories.
 
     :param logger: Logger instance
     :param targets: Set of target tool names to include
@@ -314,9 +331,9 @@ def cleanup_broken_links(logger: logging.Logger, targets: set[str]) -> None:
                 continue
             seen.add(dest_dir)
             for dest_path in dest_dir.iterdir():
-                if dest_path.is_symlink() and not dest_path.exists():
+                if dest_path.is_symlink():
                     dest_path.unlink()
-                    logger.info("Removed broken link: %s", dest_path.name)
+                    logger.info("Removed old symlink: %s", dest_path.name)
 
 
 def parse_args() -> argparse.Namespace:
@@ -368,14 +385,14 @@ def main() -> int:
         write_settings(settings_path, settings_dir, data, logger)
 
     if "intellij" in targets:
-        link_intellij_instructions(repo_dir, logger)
+        copy_intellij_instructions(repo_dir, logger)
 
     for asset_type, is_dir in [("skills", True), ("prompts", False), ("agents", False)]:
-        link_assets(
+        copy_assets(
             get_source_path(repo_dir, asset_type), asset_type, is_dir, logger, targets
         )
 
-    cleanup_broken_links(logger, targets)
+    cleanup_old_symlinks(logger, targets)
     return 0
 
 
