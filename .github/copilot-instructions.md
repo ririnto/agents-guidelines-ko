@@ -144,15 +144,15 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 
 ### MCP Quick Reference
 
-| MCP                 | Use For                                                     |
-| ------------------- | ----------------------------------------------------------- |
-| Context7            | library/API docs, setup steps                               |
-| Serena              | symbol navigation, usage tracing, bounded edits             |
-| JetBrains           | inspections, search, refactoring, formatting, run, terminal |
-| fetch               | external web content                                        |
-| markitdown          | document conversion to Markdown                             |
-| git                 | diffs, history, blame                                       |
-| sequential-thinking | complex multi-step decisions                                |
+| MCP | Use For |
+| --- | ------- |
+| Context7 | library/API docs, setup steps |
+| Serena | symbol navigation, usage tracing, bounded edits |
+| JetBrains | inspections, search, refactoring, formatting, run, terminal |
+| fetch | external web content |
+| markitdown | document conversion to Markdown |
+| git | diffs, history, blame |
+| sequential-thinking | complex multi-step decisions |
 
 ### MCP Failure Handling
 

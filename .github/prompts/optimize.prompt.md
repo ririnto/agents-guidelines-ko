@@ -10,32 +10,10 @@ Improve code performance, readability, and maintainability.
 
 ## Optimization Areas
 
-### 1. Performance Optimization
-
-- Algorithm complexity improvement (O(n²) → O(n log n))
-- Remove unnecessary operations
-- Apply caching
-- Lazy Loading
-- Batch processing
-
-### 2. Readability Optimization
-
-- Clear naming
-- Appropriate abstraction
-- Consistent code style
-- Remove unnecessary complexity
-
-### 3. Memory Optimization
-
-- Memory leak prevention
-- Reduce unnecessary object creation
-- Use streams/generators
-
-### 4. Bundle Optimization (Web)
-
-- Code splitting
-- Tree shaking
-- Image/asset optimization
+1. Performance: reduce complexity, remove needless work, caching, lazy loading, batching.
+2. Readability: clear naming, right abstraction, consistent style, simplify.
+3. Memory: prevent leaks, avoid extra objects, use streams/generators.
+4. Bundle (web): code splitting, tree shaking, asset optimization.
 
 ## Output Format
 

@@ -12,31 +12,16 @@ Implement requested features following language conventions.
 
 ### Code Style
 
-- Follow language-specific naming conventions
-- Write self-documenting code
-- No unnecessary comments
-
-### When to Add Documentation
-
-Add JSDoc or docstrings only when:
-
-- Method name cannot fully express intent
-- Complex algorithm needs explanation
-- Public API requires usage examples
-
-### Comment Policy
-
-- Do NOT add comments unless explicitly requested
-- Let code speak for itself through good naming
-- Use documentation annotations for complex logic
+- Follow language conventions; write self-documenting code
+- Avoid unnecessary comments; add JSDoc/docstrings only when naming is insufficient, logic is complex, or public API needs examples
 
 ## Process
 
-1. **Understand** - Clarify requirements, ask if ambiguous
-2. **Plan** - Design interface and structure
-3. **Implement** - Write code following conventions
-4. **Test** - Add or update tests
-5. **Validate** - Run tests and lint checks
+1. Understand: clarify requirements; ask if ambiguous.
+2. Plan: design interface/structure.
+3. Implement: write code following conventions.
+4. Test: add/update tests.
+5. Validate: run tests/lint.
 
 ## Output Format
 
@@ -64,13 +49,13 @@ Add JSDoc or docstrings only when:
 
 ## Language Conventions Quick Reference
 
-| Language   | Classes     | Functions    | Constants           |
-| ---------- | ----------- | ------------ | ------------------- |
-| Java       | PascalCase  | camelCase    | SCREAMING_SNAKE     |
-| Python     | PascalCase  | snake_case   | SCREAMING_SNAKE     |
-| JavaScript | PascalCase  | camelCase    | SCREAMING_SNAKE     |
-| Go         | PascalCase  | camelCase    | PascalCase          |
-| C++        | PascalCase  | snake_case   | SCREAMING_SNAKE     |
+| Language | Classes | Functions | Constants |
+| --- | --- | --- | --- |
+| Java | PascalCase | camelCase | SCREAMING_SNAKE |
+| Python | PascalCase | snake_case | SCREAMING_SNAKE |
+| JavaScript | PascalCase | camelCase | SCREAMING_SNAKE |
+| Go | PascalCase | camelCase | PascalCase |
+| C++ | PascalCase | snake_case | SCREAMING_SNAKE |
 
 ## Notes
 

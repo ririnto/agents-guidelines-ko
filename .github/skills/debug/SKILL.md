@@ -3,17 +3,17 @@ name: debug
 description: 'Systematically analyze and fix bugs, errors, and unexpected behavior. Use when the user reports bugs, error messages, crashes, test failures, unexpected behavior, or performance issues.'
 compatibility: Requires code read/write, terminal, and debugging tools
 allowed-tools:
-  - Bash(node:*, npm:*, npx:*, pnpm:*, yarn:*, python:*, pip:*, pytest:*, go:*, cargo:*, mvn:*, ./mvnw:*, gradle:*, ./gradlew:*, make:*, cmake:*, g++:*, gcc:*, clang:*)
-  - Glob
-  - Grep
-  - Read
-  - Write
-  - mcp__context7
-  - mcp__fetch
-  - mcp__jetbrains
-  - mcp__markitdown
-  - mcp__sequential-thinking
-  - mcp__serena
+    - Bash(node:*, npm:*, npx:*, pnpm:*, yarn:*, python:*, pip:*, pytest:*, go:*, cargo:*, mvn:*, ./mvnw:*, gradle:*, ./gradlew:*, make:*, cmake:*, g++:*, gcc:*, clang:*)
+    - Glob
+    - Grep
+    - Read
+    - Write
+    - mcp__context7
+    - mcp__fetch
+    - mcp__jetbrains
+    - mcp__markitdown
+    - mcp__sequential-thinking
+    - mcp__serena
 ---
 
 # Debugging Skill
@@ -22,38 +22,12 @@ Systematically analyze and fix bugs, errors, and unexpected behavior.
 
 ## Debugging Process
 
-### 1. Reproduce the Issue
-
-- Confirm exact reproduction steps
-- Identify minimum reproduction case
-- Document expected vs actual behavior
-
-### 2. Gather Information
-
-Use MCP tools for efficient debugging:
-
-- `mcp__serena__find_referencing_symbols` - Track usages
-- `mcp__jetbrains__get_symbol_info` - Get definitions
-- `mcp__context7__get-library-docs` - Library documentation
-
-### 3. Analyze Root Cause
-
-- Check error messages and stack traces
-- Identify likely failure points
-- Use binary search to narrow scope
-- Add logging if needed
-
-### 4. Develop Fix
-
-- Fix root cause, not symptoms
-- Preserve existing behavior
-- Consider edge cases
-
-### 5. Verify Fix
-
-- Confirm original issue resolved
-- Run related tests
-- Check for regressions
+1. Reproduce: exact steps, minimal repro, expected vs actual 기록.
+2. Gather info: `mcp__serena__find_referencing_symbols`(usages), `mcp__jetbrains__get_symbol_info`(defs),
+   `mcp__context7__get-library-docs`(docs); collect logs/stack traces.
+3. Analyze: read errors, locate failure points, binary search/ logging로 범위 축소.
+4. Fix: address root cause, preserve behavior, cover edge cases.
+5. Verify: original 이슈 해결 확인, 관련 테스트 실행, 회귀 여부 점검.
 
 ## Common Bugs
 
@@ -144,6 +118,7 @@ console.log('[DEBUG] function entered with args:', args);
 
 ```python
 import logging
+
 logging.debug(f'variable: {variable}')
 ```
 

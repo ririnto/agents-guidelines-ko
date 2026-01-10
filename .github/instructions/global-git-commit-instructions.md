@@ -9,46 +9,22 @@ excludeAgent:
 
 ## OUTPUT LANGUAGE (MANDATORY)
 
-- The final commit message MUST be written in Korean
-  for all natural-language parts (header description, body, footer).
-- English is allowed ONLY for: protected identifiers, whitelist items,
-  code keywords, paths, text in backticks, and anything inside code blocks.
-- Output ONLY the final commit message text.
-  Do NOT output explanations or meta commentary.
+- Final commit message MUST be Korean for all natural-language parts (header, body, footer).
+- English ONLY for protected identifiers, whitelist items, code keywords, paths, backticks, and code blocks.
+- Output ONLY the final commit message text (no explanations or meta commentary).
 
 ## CLEAN OUTPUT (MANDATORY)
 
-- Do not write internal tool traces, opaque placeholders,
-  or assistant/meta notes into any commits.
+- Do not write internal tool traces, opaque placeholders, or assistant/meta notes into commits.
 
 ## FORMAT (MANDATORY)
 
-Conventional Commits structure is:
-
-- `<type>[optional scope]: <description>`
-- `[optional body]`
-- `[optional footer]`
-
-(Keep this structure exactly.)
-
-Allowed `type` values (exact):
-
-`feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`
-
-Rules:
-
-- Header must match `type(scope): description` or `type: description`.
-- `scope` is optional; use it only when it improves clarity.
-- `description` must be:
-  - Korean
-  - imperative mood
-  - concise
-  - no trailing period
-- If body/footer exists, separate sections with blank lines.
-- Breaking changes:
-  - mark with `!` in the header
-    and/or add `BREAKING CHANGE:` in the footer
-    (keep `BREAKING CHANGE:` as-is).
+- Structure: `<type>[optional scope]: <description>` → `[optional body]` → `[optional footer]` (keep exact order).
+- Allowed `type`: `feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`.
+- Header pattern: `type(scope): description` or `type: description`; scope only if it adds clarity.
+- Description: Korean, imperative, concise, no trailing period.
+- Body/footer: if present, separate with blank lines.
+- Breaking changes: mark with `!` in header and/or `BREAKING CHANGE:` footer (`BREAKING CHANGE:` stays in English).
 
 ## Examples
 

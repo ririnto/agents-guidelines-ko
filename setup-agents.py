@@ -64,8 +64,8 @@ CONFIG = {
     "sources": {
         "agents": Path(".github") / "agents",
         "commit": Path(".github")
-                  / "instructions"
-                  / "global-git-commit-instructions.md",
+        / "instructions"
+        / "global-git-commit-instructions.md",
         "copilot": Path(".github") / "copilot-instructions.md",
         "instructions": Path(".github") / "instructions",
         "prompts": Path(".github") / "prompts",

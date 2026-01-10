@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Tests for setup-agents.py"""
+
 import json
 import tempfile
 from pathlib import Path
@@ -12,8 +13,7 @@ import importlib.util
 import sys
 
 spec = importlib.util.spec_from_file_location(
-    "setup_agents",
-    Path(__file__).parent / "setup-agents.py"
+    "setup_agents", Path(__file__).parent / "setup-agents.py"
 )
 if spec is None or spec.loader is None:
     raise ImportError("Failed to load setup_agents module")
@@ -26,6 +26,7 @@ spec.loader.exec_module(setup_agents)
 def temp_dir() -> Iterator[Path]:
     """Fixture to create and cleanup temporary directory"""
     import shutil
+
     temp_path = Path(tempfile.mkdtemp())
     yield temp_path
     shutil.rmtree(temp_path, ignore_errors=True)
@@ -33,24 +34,19 @@ def temp_dir() -> Iterator[Path]:
 
 def test_get_dest_base_with_env_var():
     """Test get_dest_base with environment variable"""
-    tool_config = {
-        "base": Path("/default/path"),
-        "env": "TEST_ENV_VAR"
-    }
+    tool_config = {"base": Path("/default/path"), "env": "TEST_ENV_VAR"}
 
-    with patch.dict('os.environ', {'TEST_ENV_VAR': '/custom/path'}):
+    with patch.dict("os.environ", {"TEST_ENV_VAR": "/custom/path"}):
         result = setup_agents.get_dest_base(tool_config)
-        assert result == Path('/custom/path')
+        assert result == Path("/custom/path")
 
 
 def test_get_dest_base_without_env_var():
     """Test get_dest_base without environment variable"""
-    tool_config = {
-        "base": Path("/default/path")
-    }
+    tool_config = {"base": Path("/default/path")}
 
     result = setup_agents.get_dest_base(tool_config)
-    assert result == Path('/default/path')
+    assert result == Path("/default/path")
 
 
 def test_backup_and_copy(temp_dir):
@@ -140,7 +136,7 @@ def test_copy_assets_files(temp_dir):
 
     logger = MagicMock()
 
-    with patch.object(setup_agents, 'get_dest_paths', return_value=[dest_dir]):
+    with patch.object(setup_agents, "get_dest_paths", return_value=[dest_dir]):
         setup_agents.copy_assets(
             src_dir,
             setup_agents.Asset.PROMPTS,
@@ -169,7 +165,7 @@ def test_copy_assets_directories(temp_dir):
 
     logger = MagicMock()
 
-    with patch.object(setup_agents, 'get_dest_paths', return_value=[dest_dir]):
+    with patch.object(setup_agents, "get_dest_paths", return_value=[dest_dir]):
         setup_agents.copy_assets(
             src_dir,
             setup_agents.Asset.SKILLS,
@@ -198,15 +194,18 @@ def test_cleanup_old_symlinks(temp_dir):
 
     logger = MagicMock()
 
-    with patch.dict(setup_agents.CONFIG['destinations'], {
-        setup_agents.Target.CODEX.value: {
-            'base': dest_dir.parent,
-            'agents': dest_dir.name,
-            'skills': None,
-            'prompts': None,
-            'rules': None,
-        }
-    }):
+    with patch.dict(
+        setup_agents.CONFIG["destinations"],
+        {
+            setup_agents.Target.CODEX.value: {
+                "base": dest_dir.parent,
+                "agents": dest_dir.name,
+                "skills": None,
+                "prompts": None,
+                "rules": None,
+            }
+        },
+    ):
         setup_agents.cleanup_old_symlinks(logger, {setup_agents.Target.CODEX})
 
     assert regular_file.exists()
