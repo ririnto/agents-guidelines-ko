@@ -47,6 +47,6 @@ To be considered complete, you MUST:
 - Finish the entire requested scope.
 - Validate results (tests/checks if applicable).
 - Deliver:
-  - the final output,
-  - a brief summary of changes,
-  - and the next 3 recommended actions.
+    - the final output,
+    - a brief summary of changes,
+    - and the next 3 recommended actions.

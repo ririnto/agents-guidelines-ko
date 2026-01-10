@@ -3,9 +3,9 @@ name: conventional-commit
 description: 'Generate Conventional Commit messages by analyzing git diffs. Use when committing code changes, when the user needs to write commit messages, or after staging changes.'
 compatibility: 'Requires git CLI or git MCP, and a working git repository with changes (staged or unstaged).'
 allowed-tools:
-  - Bash(git:*)
-  - Read
-  - mcp__git
+    - Bash(git:*)
+    - Read
+    - mcp__git
 ---
 
 # Conventional Commit Messages (Korean Output)
@@ -20,33 +20,17 @@ Use this skill when:
 
 ## OUTPUT LANGUAGE (MANDATORY)
 
-- Final commit message MUST be written in Korean
-  for all natural-language parts
-- English is allowed ONLY for: protected identifiers, code keywords,
-  paths, backtick content, code blocks
-- Output ONLY the final commit message. No explanations or meta commentary.
+- Final commit message MUST be Korean for all natural-language parts.
+- English ONLY for protected identifiers, code keywords, paths, backtick content, code blocks.
+- Output ONLY the final commit message (no explanations or meta commentary).
 
 ## FORMAT
 
-Conventional Commits structure:
-
-```text
-<type>[optional scope]: <description>
-[optional body]
-[optional footer]
-```
-
-Allowed `type` values:
-
-`feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`
-
-Rules:
-
-- Header: `type(scope): description` or `type: description`
-- `scope` is optional; use only when it improves clarity
-- `description`: Korean, imperative mood, concise, no trailing period
-- Breaking changes: mark with `!` in header
-  and/or `BREAKING CHANGE:` in footer
+- Structure: `<type>[optional scope]: <description>` → `[optional body]` → `[optional footer]`.
+- Allowed `type`: `feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`.
+- Header: `type(scope): description` or `type: description`; scope only if it adds clarity.
+- Description: Korean, imperative, concise, no trailing period.
+- Breaking changes: mark with `!` in header and/or `BREAKING CHANGE:` in footer.
 
 ## Workflow
 

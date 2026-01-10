@@ -10,27 +10,10 @@ Analyze given error messages and provide solutions.
 
 ## Analysis Procedure
 
-1. **Identify Error Type**
-   - Syntax Error
-   - Runtime Error
-   - Type Error
-   - Reference Error
-   - Network/External Service Error
-
-2. **Stack Trace Analysis**
-   - Error location (file:line)
-   - Call path tracing
-   - Related code review
-
-3. **Identify Root Cause**
-   - Interpret error message
-   - Check related code context
-   - Match common cause patterns
-
-4. **Provide Solutions**
-   - Immediately applicable fix
-   - Alternative approaches
-   - Preventive measures
+1. Classify error: syntax, runtime, type, reference, network/external.
+2. Stack trace: location(file:line), call path, related code.
+3. Root cause: interpret message, inspect context, match common patterns.
+4. Solutions: recommend fix, alternatives, preventive measures.
 
 ## Output Format
 

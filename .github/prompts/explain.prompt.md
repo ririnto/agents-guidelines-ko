@@ -10,44 +10,27 @@ Explain selected code or technical concepts in an easy-to-understand manner.
 
 ## Explanation Structure
 
-### For Code Explanation
+### For Code
 
-1. **Overview** (one paragraph)
-   - What the code does
-   - Why it's needed
+1. Overview (what/why/role)
+2. Flow (main logic, key branches)
+3. Input/Output (params, returns, side effects)
+4. Usage example (short code)
+5. Notes (edge cases, limits)
 
-2. **Step-by-Step Operation**
-   - Main logic flow
-   - Role of each part
+### For Concepts
 
-3. **Input/Output**
-   - Parameters and types
-   - Return values
-   - Side effects
-
-4. **Usage Example**
-
-   ```text
-   // Example code
-   ```
-
-5. **Notes**
-   - Edge cases
-   - Limitations
-
-### For Concept Explanation
-
-1. **Definition** (one sentence)
-2. **Core Principles** (3-5 sentences)
-3. **Practical Examples**
-4. **Related Concepts**
-5. **Further Reading** (optional references)
+1. Definition (one sentence)
+2. Core principles (3–5 sentences)
+3. Practical examples
+4. Related concepts
+5. Further reading (optional)
 
 ## Explanation Level
 
-- **Beginner**: From basic concepts, use analogies
-- **Intermediate**: Focus on core, mention patterns (default)
-- **Advanced**: Design decisions, trade-offs, alternatives
+- Beginner: basics, definitions, analogies
+- Intermediate (default): core logic, patterns
+- Advanced: design rationale, trade-offs, alternatives
 
 ## Notes
 

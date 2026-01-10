@@ -10,32 +10,10 @@ Generate documentation for code.
 
 ## Documentation Types
 
-### 1. Code Comments
-
-- JSDoc / TSDoc
-- Python docstrings
-- GoDoc
-- Javadoc
-
-### 2. API Documentation
-
-- Endpoint description
-- Request/Response schema
-- Authentication requirements
-- Error codes
-
-### 3. README
-
-- Project overview
-- Installation instructions
-- Usage guide
-- Contributing guide
-
-### 4. Architecture Documentation
-
-- System structure
-- Component relationships
-- Data flow
+1. Code comments: JSDoc/TSDoc, Python docstrings, GoDoc, Javadoc
+2. API docs: endpoints, request/response, auth, error codes
+3. README: overview, install, usage, contributing
+4. Architecture: system structure, components, data flow
 
 ## Output Format
 
@@ -65,10 +43,10 @@ Generate documentation for code.
 
 **Headers:**
 
-| Name          | Required | Description     |
-| ------------- | -------- | --------------- |
-| Authorization | Yes      | Bearer token    |
-| Content-Type  | Yes      | application/json |
+| Name | Required | Description |
+| --- | --- | --- |
+| Authorization | Yes | Bearer token |
+| Content-Type | Yes | application/json |
 
 **Body:**
 

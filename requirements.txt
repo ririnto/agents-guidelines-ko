@@ -1,2 +1,7 @@
 # Test dependencies
 pytest>=7.0.0
+
+# Tooling
+coverage>=7.13.1
+pyright>=1.1.408
+ruff>=0.14.11

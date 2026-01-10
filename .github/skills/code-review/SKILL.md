@@ -3,17 +3,17 @@ name: code-review
 description: 'Review code changes for quality, bugs, security, and performance issues. Use when the user asks to review code, check a PR, do a code quality check, security review, find bugs, or requests code inspection.'
 compatibility: Requires Git repository and code reading tools
 allowed-tools:
-  - Bash(git:*, node:*, npm:*, npx:*, pnpm:*, yarn:*, python:*, pip:*, pytest:*, go:*, cargo:*, mvn:*, ./mvnw:*, gradle:*, ./gradlew:*, make:*, cmake:*, g++:*, gcc:*, clang:*)
-  - Glob
-  - Grep
-  - Read
-  - mcp__context7
-  - mcp__fetch
-  - mcp__git
-  - mcp__jetbrains
-  - mcp__markitdown
-  - mcp__sequential-thinking
-  - mcp__serena
+    - Bash(git:*, node:*, npm:*, npx:*, pnpm:*, yarn:*, python:*, pip:*, pytest:*, go:*, cargo:*, mvn:*, ./mvnw:*, gradle:*, ./gradlew:*, make:*, cmake:*, g++:*, gcc:*, clang:*)
+    - Glob
+    - Grep
+    - Read
+    - mcp__context7
+    - mcp__fetch
+    - mcp__git
+    - mcp__jetbrains
+    - mcp__markitdown
+    - mcp__sequential-thinking
+    - mcp__serena
 ---
 
 # Code Review Skill
@@ -23,61 +23,15 @@ and performance issues.
 
 ## Review Process
 
-### 1. Gather Context
-
-Check changed files:
-
-```bash
-git diff --name-only HEAD~1
-git diff --cached --name-only
-git status --short
-```
-
-Use MCP tools for deeper analysis:
-
-- `mcp__git__git_diff` - View detailed changes
-- `mcp__serena__find_referencing_symbols` - Track symbol usage
-- `mcp__jetbrains__get_symbol_info` - Get symbol documentation
-
-### 2. Analysis Areas
-
-#### Code Quality
-
-- Readability and clarity
-- Consistent code style
-- Appropriate abstraction level
-- Code duplication
-- Complexity (recommend ≤15 lines per function)
-
-#### Potential Bugs
-
-- Logic errors and edge cases
-- Null/undefined handling
-- Missing error handling
-- Resource cleanup
-
-#### Security Vulnerabilities
-
-- SQL/Command Injection
-- XSS (Cross-Site Scripting)
-- Authentication/Authorization issues
-- Sensitive data exposure
-- Hardcoded secrets
-
-#### Performance
-
-- Unnecessary loops
-- N+1 query problems
-- Memory leak potential
-- Inefficient algorithms
-
-#### Test Coverage
-
-- Test existence
-- Edge case testing
-- Mocking appropriateness
-
-### 3. Output Format
+1. Gather context: `git status --short`, `git diff --name-only [--cached]`;
+   deep dive with `mcp__git__git_diff`, `mcp__serena__find_referencing_symbols`, `mcp__jetbrains__get_symbol_info`.
+2. Analyze:
+    - Code quality: readability, consistency, abstraction, duplication, complexity(≤15 lines/func 권장)
+    - Bugs: logic/edge cases, null/undefined, error handling, resource cleanup
+    - Security: injection, XSS, authz/authn, secret exposure
+    - Performance: extra loops, N+1, memory leaks, inefficient algo
+    - Tests: present? edge cases? mocking 적절성?
+3. Output format:
 
 ```markdown
 ## Code Review Summary
@@ -107,33 +61,10 @@ Use MCP tools for deeper analysis:
 
 ## Language-Specific Checkpoints
 
-### JavaScript/TypeScript
-
-- strict mode usage
-- async/await error handling
-- Type definition completeness
-- ESLint rule compliance
-
-### Python
-
-- PEP 8 style
-- Type hints usage
-- Resource management with `with` statement
-- Exception handling specificity
-
-### Java/Kotlin
-
-- Null safety
-- Prefer immutable objects
-- try-with-resources for resources
-- Thread safety
-
-### Go
-
-- Error handling patterns
-- defer usage
-- goroutine leak prevention
-- context propagation
+- JavaScript/TypeScript: strict mode, async/await error handling, type definitions, ESLint rules
+- Python: PEP 8, type hints, `with` for resources, specific exceptions
+- Java/Kotlin: null safety, immutability, try-with-resources, thread safety
+- Go: error handling, `defer`, goroutine leak 예방, context 전달
 
 ## Edge Cases
 

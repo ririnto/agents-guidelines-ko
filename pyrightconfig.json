@@ -1,0 +1,8 @@
+{
+  "include": ["setup-agents.py", "test_setup_agents.py"],
+  "exclude": ["**/.git/**", "**/.venv/**", "**/.serena/**"],
+  "typeCheckingMode": "basic",
+  "pythonVersion": "3.11",
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none"
+}

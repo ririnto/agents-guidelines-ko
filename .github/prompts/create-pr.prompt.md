@@ -10,25 +10,13 @@ Analyze git changes and generate PR descriptions.
 
 ## Analysis Procedure
 
-1. **Gather Changes**
-
+1. Gather changes:
    ```bash
    git diff main...HEAD --stat
    git log main..HEAD --oneline
    ```
-
-2. **Classify Change Types**
-   - Feature addition (feat)
-   - Bug fix (fix)
-   - Refactoring (refactor)
-   - Documentation (docs)
-   - Tests (test)
-   - Configuration (chore)
-
-3. **Assess Impact Scope**
-   - Changed files/modules
-   - Dependency changes
-   - Configuration changes
+2. Classify change types: feat, fix, refactor, docs, test, chore.
+3. Assess impact: files/modules, dependencies, configs.
 
 ## Output Format
 

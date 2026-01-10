@@ -2,8 +2,8 @@
 name: write-markdown
 description: Write and revise Markdown in a clean, consistent style. Draft and edit Markdown documents. Improve formatting for headings, lists, code blocks, tables, or links.
 metadata:
-  markdownlint: "0.40.0"
-  markdownlint-cli2: "0.20.0"
+    markdownlint: "0.40.0"
+    markdownlint-cli2: "0.20.0"
 ---
 
 # Write Markdown
@@ -14,7 +14,7 @@ Write and revise Markdown in a clean, consistent style.
 
 ## When to use
 
-Use this skill when the user asks to:
+Use this skill when the user asks:
 
 - Draft or edit Markdown documents
 - Improve formatting for headings, lists, code blocks, tables, or links
