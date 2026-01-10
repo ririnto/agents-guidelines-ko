@@ -105,6 +105,15 @@ When an MCP tool call fails or times out:
 3. If all alternatives fail, explain what was attempted
    and ask for guidance
 
+### JetBrains MCP Usage
+
+When using JetBrains MCP tools:
+
+- **get_file_problems**: Set `errorsOnly` to `false` for comprehensive problem collection
+  - `errorsOnly: false` returns warnings, hints, and suggestions in addition to errors
+  - Provides more detailed feedback for code improvement
+  - Useful for thorough code quality analysis
+
 ### Visualization
 
 - **Prefer Mermaid** for diagrams, flowcharts, graphs, and visualizations
