@@ -79,17 +79,17 @@ Repository artifacts are authoritative.
 
 ### MCP Quick Reference
 
-| MCP                 | Use For                                    |
-| ------------------- | ------------------------------------------ |
-| Context7            | Library/API docs, setup steps              |
-| Serena              | Symbol navigation, usage tracing, memory   |
-| JetBrains           | Symbol nav, rename, find usages, run cfg   |
-| ripgrep             | Fast broad text search                     |
-| fetch               | External web content                       |
-| markitdown          | PDF/Office document extraction             |
-| git                 | Diffs, history, blame                      |
-| sequential-thinking | Complex multi-step decisions               |
-| memory              | Persistent notes (prefix: `yyyy-MM-dd-`)   |
+| MCP                 | Use For                                           |
+| ------------------- | ------------------------------------------------- |
+| Context7            | Library/API docs, setup steps                     |
+| Serena              | Symbol navigation, usage tracing, memory          |
+| JetBrains           | Refactoring, formatting, symbol nav, diagnostics  |
+| ripgrep             | Fast broad text search                            |
+| fetch               | External web content                              |
+| markitdown          | PDF/Office document extraction                    |
+| git                 | Diffs, history, blame                             |
+| sequential-thinking | Complex multi-step decisions                      |
+| memory              | Persistent notes (prefix: `yyyy-MM-dd-`)          |
 
 MCP rules apply only when that server is available.
 **Use MCP tools aggressively**—they provide better context
@@ -113,6 +113,15 @@ When using JetBrains MCP tools:
   - `errorsOnly: false` returns warnings, hints, and suggestions in addition to errors
   - Provides more detailed feedback for code improvement
   - Useful for thorough code quality analysis
+- **Refactoring operations**: Leverage IDE-native refactoring capabilities
+  - `rename_symbol`: Safe renaming with usage tracking across project
+  - `extract_method`: Extract code blocks into reusable methods
+  - `inline`: Inline variables, methods, or constants
+  - Preserves code behavior while improving structure
+- **Code formatting**: Apply consistent code style
+  - `reformat_code`: Format code according to project style settings
+  - `optimize_imports`: Organize and clean up import statements
+  - Ensures code consistency across the codebase
 
 ### Visualization
 
