@@ -40,9 +40,9 @@ jobs:
       - name: Verify setup-agents.py syntax
         run: python -m py_compile setup-agents.py
 
-      - name: Run tests with coverage
+      - name: Run tests with coverage and JUnit report
         run: |
-          coverage run -m pytest -v --tb=short
+          coverage run -m pytest -v --tb=short --junitxml=report.xml
           coverage xml -o coverage.xml
           coverage report
 
@@ -51,4 +51,11 @@ jobs:
         with:
           name: coverage-${{ matrix.python-version }}
           path: coverage.xml
+          if-no-files-found: error
+
+      - name: Upload pytest JUnit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-${{ matrix.python-version }}
+          path: report.xml
           if-no-files-found: error
