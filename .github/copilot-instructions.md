@@ -123,6 +123,44 @@ When using JetBrains MCP tools:
   - `optimize_imports`: Organize and clean up import statements
   - Ensures code consistency across the codebase
 
+### Context7 MCP Usage
+
+When using Context7 MCP tools for library documentation:
+
+- **get-library-docs**: Retrieve official documentation for libraries and frameworks
+  - Use when you need accurate API references, usage patterns, or examples
+  - Supports major ecosystems: npm, PyPI, Maven, NuGet, Go modules, etc.
+  - Returns structured documentation with code examples
+- **resolve-library-id**: Find the correct library identifier
+  - Use when library name is ambiguous or you need version info
+  - Helps locate the right package across different ecosystems
+
+### Serena MCP Usage
+
+When using Serena MCP tools for code navigation and analysis:
+
+- **find_symbol**: Locate symbol definitions across the codebase
+  - Search for functions, classes, methods, variables by name
+  - Returns file path, line number, and symbol context
+- **find_referencing_symbols**: Find all usages of a symbol
+  - Track where a symbol is referenced or called
+  - Essential for refactoring and impact analysis
+- **get_symbols_overview**: Get high-level code structure
+  - Retrieve all symbols in a file or module
+  - Useful for understanding code organization
+- **rename_symbol**: Safe symbol renaming with automatic updates
+  - Renames symbol and all its references
+  - Preserves code correctness across the project
+
+### Markitdown MCP Usage
+
+When using Markitdown MCP for document conversion:
+
+- **convert_to_markdown**: Convert various document formats to Markdown
+  - Supports: PDF, Word (.docx), PowerPoint (.pptx), Excel (.xlsx)
+  - Also handles HTML, images (with OCR), and audio (with transcription)
+  - Use for extracting content from non-text documents for analysis
+
 ### Visualization
 
 - **Prefer Mermaid** for diagrams, flowcharts, graphs, and visualizations
