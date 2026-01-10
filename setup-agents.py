@@ -9,9 +9,23 @@ import shutil
 import sys
 import tempfile
 from pathlib import Path
+from enum import StrEnum
 from typing import Optional
 
-ALL_TARGETS = ("vscode", "codex", "claude", "intellij")
+
+class Target(StrEnum):
+    VSCODE = "vscode"
+    CODEX = "codex"
+    CLAUDE = "claude"
+    INTELLIJ = "intellij"
+
+
+class Asset(StrEnum):
+    AGENTS = "agents"
+    SKILLS = "skills"
+    PROMPTS = "prompts"
+    RULES = "rules"
+
 
 CONFIG = {
     "destinations": {
@@ -20,6 +34,7 @@ CONFIG = {
             "agents": "agents",
             "skills": "skills",
             "prompts": "commands",
+            "rules": "rules",
         },
         "codex": {
             "base": Path.home() / ".codex",
@@ -49,12 +64,14 @@ CONFIG = {
     "sources": {
         "agents": Path(".github") / "agents",
         "commit": Path(".github")
-        / "instructions"
-        / "global-git-commit-instructions.md",
+                  / "instructions"
+                  / "global-git-commit-instructions.md",
         "copilot": Path(".github") / "copilot-instructions.md",
         "instructions": Path(".github") / "instructions",
         "prompts": Path(".github") / "prompts",
         "skills": Path(".github") / "skills",
+        "claude_agents": Path(".claude") / "agents",
+        "claude_rules": Path(".claude") / "rules",
     },
     "vscode": {
         "settings-keys": {
@@ -82,7 +99,12 @@ def get_source_path(repo_dir: Path, key: str) -> Path:
     :param key: Source key in CONFIG
     :returns: Absolute path
     """
-    return repo_dir / CONFIG["sources"][key]
+    source = CONFIG["sources"][key]
+    if not isinstance(source, Path):
+        raise TypeError(
+            f"Source path for '{key}' must be a Path, got {type(source).__name__}"
+        )
+    return repo_dir / source
 
 
 def get_dest_base(tool_config: dict) -> Path:
@@ -205,12 +227,9 @@ def backup_and_copy(
     :param logger: Logger instance
     """
     dest_path.parent.mkdir(parents=True, exist_ok=True)
-    # Backup existing file if present (including broken symlinks)
-    # Note: broken symlinks have is_symlink()=True but exists()=False
     if dest_path.exists() or dest_path.is_symlink():
         backup_dir.mkdir(parents=True, exist_ok=True)
         timestamp = datetime.datetime.now().strftime("%Y-%m-%dT-%H-%M-%S")
-        # Preserve original extension in backup name
         if dest_path.suffix:
             backup_name = dest_path.stem + f".{timestamp}" + dest_path.suffix
         else:
@@ -235,8 +254,16 @@ def copy_intellij_instructions(repo_dir: Path, logger: logging.Logger) -> None:
     base_dir = get_dest_base(intellij_config)
     backup_dir = base_dir / "backup"
     instructions_map = intellij_config["instructions"]
+    if not isinstance(instructions_map, dict):
+        logger.warning("Skipping IntelliJ instructions: instructions config is invalid")
+        return
 
     for source_key, target_name in instructions_map.items():
+        if not isinstance(target_name, str):
+            logger.warning(
+                "Skipping IntelliJ instruction %s: target must be a string", source_key
+            )
+            continue
         source_path = get_source_path(repo_dir, source_key)
         if not source_path.exists():
             print(f"Missing source: {source_path}", file=sys.stderr)
@@ -245,19 +272,23 @@ def copy_intellij_instructions(repo_dir: Path, logger: logging.Logger) -> None:
         backup_and_copy(dest_path, backup_dir, source_path, logger)
 
 
-def get_dest_paths(asset_type: str, targets: set[str]) -> list[Path]:
+def get_dest_paths(asset_type: Asset, targets: set[Target]) -> list[Path]:
     """
     Get destination paths for an asset type.
 
-    :param asset_type: One of 'agents', 'skills', 'prompts'
+    :param asset_type: Asset type to copy
     :param targets: Set of target tool names to include
     :returns: List of destination directory paths
     """
     paths = []
     for tool_name, tool_config in CONFIG["destinations"].items():
-        if tool_name not in targets:
+        try:
+            target = Target(tool_name)
+        except ValueError:
             continue
-        subdir = tool_config.get(asset_type)
+        if target not in targets:
+            continue
+        subdir = tool_config.get(asset_type.value)
         if subdir is None:
             continue
         base = get_dest_base(tool_config)
@@ -267,16 +298,16 @@ def get_dest_paths(asset_type: str, targets: set[str]) -> list[Path]:
 
 def copy_assets(
     src_dir: Path,
-    asset_type: str,
+    asset_type: Asset,
     is_directory: bool,
     logger: logging.Logger,
-    targets: set[str],
+    targets: set[Target],
 ) -> None:
     """
     Copy assets to destination directories.
 
     :param src_dir: Source directory containing assets
-    :param asset_type: One of 'agents', 'skills', 'prompts'
+    :param asset_type: Asset type to copy
     :param is_directory: True if assets are directories (skills)
     :param logger: Logger instance
     :param targets: Set of target tool names to include
@@ -292,25 +323,20 @@ def copy_assets(
         for dest_dir in dest_paths:
             dest_dir.mkdir(parents=True, exist_ok=True)
             dest_path = dest_dir / src_path.name
-            # Remove existing destination before copying
-            # Check is_symlink() first to handle broken symlinks correctly
             if dest_path.is_symlink():
-                # Symlink (may be broken) - just remove the link itself
                 dest_path.unlink()
             elif dest_path.is_dir():
-                # Regular directory - remove entire tree
                 shutil.rmtree(dest_path)
             elif dest_path.exists():
-                # Regular file - remove it
                 dest_path.unlink()
             if is_directory:
                 shutil.copytree(src_path, dest_path)
             else:
                 shutil.copy2(src_path, dest_path)
-            logger.info("Copied %s: %s", asset_type[:-1], src_path.name)
+            logger.info("Copied %s: %s", asset_type.value, src_path.name)
 
 
-def cleanup_old_symlinks(logger: logging.Logger, targets: set[str]) -> None:
+def cleanup_old_symlinks(logger: logging.Logger, targets: set[Target]) -> None:
     """
     Remove old symlinks from all destination directories.
 
@@ -319,11 +345,15 @@ def cleanup_old_symlinks(logger: logging.Logger, targets: set[str]) -> None:
     """
     seen: set[Path] = set()
     for tool_name, tool_config in CONFIG["destinations"].items():
-        if tool_name not in targets:
+        try:
+            target = Target(tool_name)
+        except ValueError:
+            continue
+        if target not in targets:
             continue
         base = get_dest_base(tool_config)
-        for asset_type in ("agents", "skills", "prompts"):
-            subdir = tool_config.get(asset_type)
+        for asset_type in Asset:
+            subdir = tool_config.get(asset_type.value)
             if subdir is None:
                 continue
             dest_dir = base if subdir == "." else base / subdir
@@ -349,17 +379,15 @@ def parse_args() -> argparse.Namespace:
         "targets",
         nargs="*",
         metavar="TARGET",
-        help=f"Target environments to configure: {', '.join(ALL_TARGETS)} (default: all)",
+        choices=[target.value for target in Target],
+        help=(
+            "Target environments to configure: "
+            f"{', '.join(target.value for target in Target)} (default: all)"
+        ),
     )
     args = parser.parse_args()
     if not args.targets:
-        args.targets = list(ALL_TARGETS)
-    else:
-        invalid = set(args.targets) - set(ALL_TARGETS)
-        if invalid:
-            parser.error(
-                f"invalid target(s): {', '.join(invalid)} (choose from {', '.join(ALL_TARGETS)})"
-            )
+        args.targets = [target.value for target in Target]
     return args
 
 
@@ -370,12 +398,12 @@ def main() -> int:
     :returns: Exit code (0 for success, 1 for failure)
     """
     args = parse_args()
-    targets: set[str] = set(args.targets) if args.targets else set(ALL_TARGETS)
+    targets: set[Target] = {Target(target) for target in args.targets}
 
     logger = setup_logger()
     repo_dir = get_repo_dir()
 
-    if "vscode" in targets:
+    if Target.VSCODE in targets:
         settings_path, settings_dir = get_vscode_settings_path()
         ensure_settings_file(settings_path, settings_dir, logger)
         data = load_settings(settings_path)
@@ -384,12 +412,40 @@ def main() -> int:
         update_vscode_settings(data, repo_dir, logger)
         write_settings(settings_path, settings_dir, data, logger)
 
-    if "intellij" in targets:
+    if Target.INTELLIJ in targets:
         copy_intellij_instructions(repo_dir, logger)
 
-    for asset_type, is_dir in [("skills", True), ("prompts", False), ("agents", False)]:
+    claude_targets = targets & {Target.CLAUDE}
+    non_claude_targets = targets - {Target.CLAUDE}
+
+    for asset_type, is_dir in [(Asset.SKILLS, True), (Asset.PROMPTS, False)]:
         copy_assets(
             get_source_path(repo_dir, asset_type), asset_type, is_dir, logger, targets
+        )
+
+    if non_claude_targets:
+        copy_assets(
+            get_source_path(repo_dir, Asset.AGENTS.value),
+            Asset.AGENTS,
+            False,
+            logger,
+            non_claude_targets,
+        )
+
+    if claude_targets:
+        copy_assets(
+            get_source_path(repo_dir, "claude_agents"),
+            Asset.AGENTS,
+            False,
+            logger,
+            claude_targets,
+        )
+        copy_assets(
+            get_source_path(repo_dir, "claude_rules"),
+            Asset.RULES,
+            False,
+            logger,
+            claude_targets,
         )
 
     cleanup_old_symlinks(logger, targets)
