@@ -253,3 +253,45 @@ def test_write_settings(temp_dir):
     assert settings_file.exists()
     loaded_data = json.loads(settings_file.read_text())
     assert loaded_data == data
+
+
+def test_copy_special_instructions(temp_dir):
+    """Test copy_special_instructions copies copilot instructions to each tool."""
+    repo_dir = temp_dir / "repo"
+    copilot_dir = repo_dir / ".github"
+    copilot_dir.mkdir(parents=True)
+    copilot_file = copilot_dir / "copilot-instructions.md"
+    copilot_file.write_text("# Copilot instructions")
+
+    codex_base = temp_dir / "codex"
+    claude_base = temp_dir / "claude"
+
+    logger = MagicMock()
+    targets = {setup_agents.Target.CODEX, setup_agents.Target.CLAUDE}
+
+    with patch.dict(
+        setup_agents.CONFIG["destinations"],
+        {
+            setup_agents.Target.CODEX.value: {
+                "base": codex_base,
+                "agents": "agents",
+                "skills": None,
+                "prompts": None,
+                "rules": None,
+            },
+            setup_agents.Target.CLAUDE.value: {
+                "base": claude_base,
+                "agents": "agents",
+                "skills": "skills",
+                "prompts": "commands",
+                "rules": "rules",
+            },
+        },
+        clear=False,
+    ):
+        setup_agents.copy_special_instructions(repo_dir, logger, targets)
+
+    assert (codex_base / "AGENTS.md").exists()
+    assert (codex_base / "AGENTS.md").read_text() == "# Copilot instructions"
+    assert (claude_base / "CLAUDE.md").exists()
+    assert (claude_base / "CLAUDE.md").read_text() == "# Copilot instructions"

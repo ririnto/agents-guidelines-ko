@@ -81,6 +81,15 @@ CONFIG = {
     },
 }
 
+SPECIAL_INSTRUCTION_COPIES = {
+    "codex": [
+        {"source": "copilot", "filename": "AGENTS.md"},
+    ],
+    "claude": [
+        {"source": "copilot", "filename": "CLAUDE.md"},
+    ],
+}
+
 
 def setup_logger() -> logging.Logger:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -296,6 +305,41 @@ def get_dest_paths(asset_type: Asset, targets: set[Target]) -> list[Path]:
     return paths
 
 
+def copy_special_instructions(
+    repo_dir: Path, logger: logging.Logger, targets: set[Target]
+) -> None:
+    """
+    Copy specific instruction files to tool roots.
+
+    :param repo_dir: Repository root directory
+    :param logger: Logger instance
+    :param targets: Set of target tool names to include
+    """
+    for tool_name, copies in SPECIAL_INSTRUCTION_COPIES.items():
+        try:
+            target = Target(tool_name)
+        except ValueError:
+            continue
+        if target not in targets:
+            continue
+        tool_config = CONFIG["destinations"].get(tool_name)
+        if not tool_config:
+            continue
+        base_dir = get_dest_base(tool_config)
+        backup_dir = base_dir / "backup"
+        for entry in copies:
+            source_key = entry.get("source")
+            filename = entry.get("filename")
+            if not isinstance(source_key, str) or not isinstance(filename, str):
+                continue
+            source_path = get_source_path(repo_dir, source_key)
+            if not source_path.exists():
+                print(f"Missing source: {source_path}", file=sys.stderr)
+                continue
+            dest_path = base_dir / filename
+            backup_and_copy(dest_path, backup_dir, source_path, logger)
+
+
 def copy_assets(
     src_dir: Path,
     asset_type: Asset,
@@ -447,6 +491,8 @@ def main() -> int:
             logger,
             claude_targets,
         )
+
+    copy_special_instructions(repo_dir, logger, targets)
 
     cleanup_old_symlinks(logger, targets)
     return 0
