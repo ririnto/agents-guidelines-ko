@@ -163,17 +163,26 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 ### JetBrains MCP Notes
 
 - `projectPath`: absolute path, trailing `/` 권장(예: `<project-root>/`); 모르면 current working directory 사용.
-- 실행: run configuration 우선 → `get_run_configurations` → `execute_run_configuration`.
-- 검사: 파일 단위 품질 확인은 `get_file_problems`(warning 포함 시 `errorsOnly: false`; 일부는 `reformat_file`로 auto-fix).
-- 탐색/검색: index 기반 도구 우선(`find_files_by_name_keyword`, `find_files_by_glob`, `search_in_files_by_text`, `search_in_files_by_regex`, `list_directory_tree`); symbol 확인은 `get_symbol_info`.
+- 실행: `get_run_configurations` → `execute_run_configuration`.
+- 검사: 파일 단위 품질 확인은 `get_file_problems`(warning 포함 확인 시 `errorsOnly: false`; 일부는 `reformat_file`로 auto-fix).
+- 파일 검색: index 기반 도구 우선(`find_files_by_name_keyword`, `find_files_by_glob`, `list_directory_tree`).
+- 패턴 검색: 텍스트/정규식 검색은 `search_in_files_by_text`, `search_in_files_by_regex`.
+- 심볼 정보: 선언/문서 확인은 `get_symbol_info`로 조회.
 - 구조/의존성: `get_project_dependencies`, `get_project_modules`로 확인.
 - 정리/리팩터: `reformat_file`; 안전한 rename은 `rename_refactoring`; 단순 치환은 `replace_text_in_file`.
+    - 주의: `replace_text_in_file`는 텍스트 파일의 단순 치환에만 사용하고, binary/대용량/구조적 refactor에는 사용하지 않는다.
 
 ### Serena MCP Notes
 
 - 활성화: 세션 첫 호출에 `activate_project`로 시작.
-- 탐색: symbol 기반 도구 우선(`get_symbols_overview`, `find_symbol`, `find_referencing_symbols`).
+- Memory: Project Metadata(architecture/conventions)를 serena memory로 관리한다.
+    - Memory tools: `list_memories`, `read_memory`, `write_memory`, `delete_memory`.
+    - Examples: project layout, build/test commands, naming conventions, domain glossary, decision records.
+    - Exclude: short-lived work logs, temporary TODO.
+- 기본 순서: JetBrains MCP로 가능한 작업을 우선 수행하고, JetBrains에서 불가/제한적일 때 Serena를 검토한다.
+- 탐색: symbol 기반 도구(`get_symbols_overview`, `find_symbol`, `find_referencing_symbols`)로 정확한 위치와 참조를 파악.
 - 실패 대응: 호출 실패 시 응답 근거로 범위 축소 또는 JetBrains/다른 MCP로 전환.
+- rename: 단일 파일/간단 참조는 JetBrains `rename_refactoring`, 다중 파일/semantic rename은 Serena `rename_symbol`.
 
 ### MarkItDown MCP Notes
 
