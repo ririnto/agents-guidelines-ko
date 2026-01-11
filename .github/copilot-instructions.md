@@ -103,15 +103,15 @@ excludeAgent:
     - 영향 범위, 후속 작업 후보, 리스크 / 트레이드오프, 검증 강화 포인트
 
 ```markdown
-질문 <number>: <질문 내용>
+질문 `<number>`: `<질문 내용>`
 
 | Option | Description |
 |--------|-------------|
-| A | <Option A description> |
-| B | <Option B description> |
-| C | <Option C description> |
+| A | `<Option A description>` |
+| B | `<Option B description>` |
+| C | `<Option C description>` |
 
-**Recommended:** Option [X] - <reasoning>
+**Recommended:** Option `[X]` - `<reasoning>`
 
 답변 예시: A / B / C / recommend / different answer
 ````
@@ -174,14 +174,17 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 
 ### Serena MCP Notes
 
-- 활성화: 세션 첫 호출에 `activate_project`로 시작.
+- Activation: 세션 첫 호출에 `activate_project`로 시작.
+    - 활성화 후 온보딩 체크(`check_onboarding_performed`)를 수행한다.
 - Memory: Project Metadata(architecture/conventions)를 serena memory로 관리한다.
     - Memory tools: `list_memories`, `read_memory`, `write_memory`, `delete_memory`.
+    - Memory는 Markdown 형식이며, section/heading을 포함한 Markdown 스타일로 작성한다.
+    - Memory 저장/업데이트 시 section-level heading을 사용하고, heading 다음 줄에 빈 줄을 추가한다.
     - Examples: project layout, build/test commands, naming conventions, domain glossary, decision records.
     - Exclude: short-lived work logs, temporary TODO.
-- 기본 순서: JetBrains MCP로 가능한 작업을 우선 수행하고, JetBrains에서 불가/제한적일 때 Serena를 검토한다.
-- 탐색: symbol 기반 도구(`get_symbols_overview`, `find_symbol`, `find_referencing_symbols`)로 정확한 위치와 참조를 파악.
-- 실패 대응: 호출 실패 시 응답 근거로 범위 축소 또는 JetBrains/다른 MCP로 전환.
+- Default order: JetBrains MCP로 가능한 작업을 우선 수행하고, JetBrains에서 불가/제한적일 때 Serena를 검토한다.
+- Exploration: symbol 기반 도구(`get_symbols_overview`, `find_symbol`, `find_referencing_symbols`)로 정확한 위치와 참조를 파악.
+- Failure handling: 호출 실패 시 응답 근거로 범위 축소 또는 JetBrains/다른 MCP로 전환.
 - rename: 단일 파일/간단 참조는 JetBrains `rename_refactoring`, 다중 파일/semantic rename은 Serena `rename_symbol`.
 
 ### MarkItDown MCP Notes
@@ -226,24 +229,24 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 
 Changes:
 
-- <what changed>
+- `<what changed>`
 
 Location:
 
-- <files / modules affected>
+- `<files / modules affected>`
 
 Risks:
 
-- <what might break / what to watch>
+- `<what might break / what to watch>`
 
 Validation:
 
-- <what ran / what was checked>
-- <unrelated failures reported without fixing>
+- `<what ran / what was checked>`
+- `<unrelated failures reported without fixing>`
 
 Next:
 
-- <optional suggestions / follow-up questions>
+- `<optional suggestions / follow-up questions>`
 
 ## Guardrails
 
