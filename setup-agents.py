@@ -63,9 +63,7 @@ CONFIG = {
     },
     "sources": {
         "agents": Path(".github") / "agents",
-        "commit": Path(".github")
-        / "instructions"
-        / "global-git-commit-instructions.md",
+        "commit": Path(".github") / "instructions" / "global-git-commit-instructions.md",
         "copilot": Path(".github") / "copilot-instructions.md",
         "instructions": Path(".github") / "instructions",
         "prompts": Path(".github") / "prompts",
@@ -110,9 +108,7 @@ def get_source_path(repo_dir: Path, key: str) -> Path:
     """
     source = CONFIG["sources"][key]
     if not isinstance(source, Path):
-        raise TypeError(
-            f"Source path for '{key}' must be a Path, got {type(source).__name__}"
-        )
+        raise TypeError(f"Source path for '{key}' must be a Path, got {type(source).__name__}")
     return repo_dir / source
 
 
@@ -140,9 +136,7 @@ def get_vscode_settings_path() -> tuple[Path, Path]:
     return settings_path, base_dir
 
 
-def ensure_settings_file(
-    settings_path: Path, settings_dir: Path, logger: logging.Logger
-) -> None:
+def ensure_settings_file(settings_path: Path, settings_dir: Path, logger: logging.Logger) -> None:
     """
     Ensure settings file exists.
 
@@ -170,9 +164,7 @@ def load_settings(settings_path: Path) -> Optional[dict]:
         return None
 
 
-def write_settings(
-    settings_path: Path, settings_dir: Path, data: dict, logger: logging.Logger
-) -> None:
+def write_settings(settings_path: Path, settings_dir: Path, data: dict, logger: logging.Logger) -> None:
     """
     Write settings to JSON file atomically.
 
@@ -181,14 +173,10 @@ def write_settings(
     :param data: Settings data to write
     :param logger: Logger instance
     """
-    fd, tmp_path = tempfile.mkstemp(
-        prefix="settings.", suffix=".json", dir=settings_dir
-    )
+    fd, tmp_path = tempfile.mkstemp(prefix="settings.", suffix=".json", dir=settings_dir)
     os.close(fd)
     tmp_file = Path(tmp_path)
-    tmp_file.write_text(
-        json.dumps(data, indent=2, ensure_ascii=True) + "\n", encoding="utf-8"
-    )
+    tmp_file.write_text(json.dumps(data, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
     tmp_file.replace(settings_path)
     logger.info("Updated settings file: %s", settings_path)
 
@@ -210,23 +198,15 @@ def update_vscode_settings(data: dict, repo_dir: Path, logger: logging.Logger) -
 
     commit_file = str(get_source_path(repo_dir, "commit"))
     entry = {"file": commit_file}
-    commit_instructions = data.setdefault(
-        keys["commit-message-generation-instructions"], []
-    )
-    if not any(
-        item.get("file") == commit_file
-        for item in commit_instructions
-        if isinstance(item, dict)
-    ):
+    commit_instructions = data.setdefault(keys["commit-message-generation-instructions"], [])
+    if not any(item.get("file") == commit_file for item in commit_instructions if isinstance(item, dict)):
         commit_instructions.append(entry)
 
     logger.info("Updated VS Code settings for repo: %s", repo_dir)
     return True
 
 
-def backup_and_copy(
-    dest_path: Path, backup_dir: Path, source_path: Path, logger: logging.Logger
-) -> None:
+def backup_and_copy(dest_path: Path, backup_dir: Path, source_path: Path, logger: logging.Logger) -> None:
     """
     Backup existing file and copy source file.
 
@@ -269,9 +249,7 @@ def copy_intellij_instructions(repo_dir: Path, logger: logging.Logger) -> None:
 
     for source_key, target_name in instructions_map.items():
         if not isinstance(target_name, str):
-            logger.warning(
-                "Skipping IntelliJ instruction %s: target must be a string", source_key
-            )
+            logger.warning("Skipping IntelliJ instruction %s: target must be a string", source_key)
             continue
         source_path = get_source_path(repo_dir, source_key)
         if not source_path.exists():
@@ -305,9 +283,7 @@ def get_dest_paths(asset_type: Asset, targets: set[Target]) -> list[Path]:
     return paths
 
 
-def copy_special_instructions(
-    repo_dir: Path, logger: logging.Logger, targets: set[Target]
-) -> None:
+def copy_special_instructions(repo_dir: Path, logger: logging.Logger, targets: set[Target]) -> None:
     """
     Copy specific instruction files to tool roots.
 
@@ -416,18 +392,13 @@ def parse_args() -> argparse.Namespace:
 
     :returns: Parsed arguments
     """
-    parser = argparse.ArgumentParser(
-        description="Setup agent configurations for various tools."
-    )
+    parser = argparse.ArgumentParser(description="Setup agent configurations for various tools.")
     parser.add_argument(
         "targets",
         nargs="*",
         metavar="TARGET",
         choices=[target.value for target in Target],
-        help=(
-            "Target environments to configure: "
-            f"{', '.join(target.value for target in Target)} (default: all)"
-        ),
+        help=(f"Target environments to configure: {', '.join(target.value for target in Target)} (default: all)"),
     )
     args = parser.parse_args()
     if not args.targets:
@@ -463,9 +434,7 @@ def main() -> int:
     non_claude_targets = targets - {Target.CLAUDE}
 
     for asset_type, is_dir in [(Asset.SKILLS, True), (Asset.PROMPTS, False)]:
-        copy_assets(
-            get_source_path(repo_dir, asset_type), asset_type, is_dir, logger, targets
-        )
+        copy_assets(get_source_path(repo_dir, asset_type), asset_type, is_dir, logger, targets)
 
     if non_claude_targets:
         copy_assets(

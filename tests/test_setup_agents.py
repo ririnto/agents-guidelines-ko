@@ -13,7 +13,8 @@ import importlib.util
 import sys
 
 spec = importlib.util.spec_from_file_location(
-    "setup_agents", Path(__file__).parent / "setup-agents.py"
+    "setup_agents",
+    Path(__file__).resolve().parents[1] / "setup-agents.py",
 )
 if spec is None or spec.loader is None:
     raise ImportError("Failed to load setup_agents module")

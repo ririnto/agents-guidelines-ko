@@ -16,5 +16,5 @@ ij_markdown_force_one_space_after_header_symbol = true
 ij_markdown_keep_indents_on_empty_lines = false
 ij_markdown_format_tables = false
 
-[{*.yml, *.yaml}]
+[{*.yml,*.yaml}]
 indent_size = 2

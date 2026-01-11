@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agents-guidelines-ko"
+version = "0.1.0"
+description = "Tooling for configuring Copilot/CLAUDE/Codex agent instructions."
+authors = [{name = "ririnto"}]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "coverage",
+    "pyright",
+    "pytest",
+    "ruff",
+]
+
+[tool.pyright]
+include = ["setup-agents.py", "tests/test_setup_agents.py"]
+exclude = ["**/.git/**", "**/.venv/**", "**/.serena/**"]
+pythonVersion = "3.11"
+typeCheckingMode = "basic"
+reportMissingImports = "none"
+reportMissingModuleSource = "none"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = ["-ra", "-q"]
+
+[tool.coverage.run]
+branch = true
+source = ["."]
+omit = ["tests/*", "__pycache__/*", ".venv/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
