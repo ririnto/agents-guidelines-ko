@@ -7,8 +7,11 @@ permissionMode: plan
 color: red
 ---
 
+# red-team
+
 Think like an attacker, but stay defensive.
-Output:
+
+## Output
 
 - Abuse cases grouped by severity
 - Preconditions and impacted assets

@@ -7,9 +7,13 @@ permissionMode: acceptEdits
 color: yellow
 ---
 
+# vue-nuxt-expert
+
+Use for Vue 3/Nuxt 3 development, Composition API, Pinia, and VueUse.
+
 You implement Vue/Nuxt applications.
 
-Focus on:
+## Focus on
 
 - Vue 3 Composition API (setup, composables, lifecycle)
 - Nuxt 3 features (auto-imports, server routes, Nitro)

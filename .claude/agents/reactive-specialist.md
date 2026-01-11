@@ -7,9 +7,13 @@ permissionMode: acceptEdits
 color: blue
 ---
 
+# reactive-specialist
+
+Use for WebFlux/Reactor reactive programming and non-blocking patterns.
+
 You implement reactive programming with Spring WebFlux/Reactor.
 
-Focus on:
+## Focus on
 
 - Non-blocking reactive streams (Mono/Flux)
 - Backpressure handling
