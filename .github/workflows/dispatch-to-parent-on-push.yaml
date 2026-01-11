@@ -1,0 +1,39 @@
+name: Notify mcp-compose-bundle
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  notify-parent-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger mcp-compose-bundle submodule update
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.MCP_COMPOSE_BUNDLE_PAT }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/ririnto/mcp-compose-bundle/dispatches \
+            -d @- <<EOF
+          {
+            "event_type": "guidelines.updated",
+            "client_payload": {
+              "repository": "ririnto/agents-guidelines-ko",
+              "ref": "${{ github.ref }}",
+              "sha": "${{ github.sha }}",
+              "timestamp": "${{ github.event.head_commit.timestamp }}",
+              "pusher": "${{ github.actor }}"
+            }
+          }
+          EOF
+
+      - name: Verify dispatch request
+        if: success()
+        run: |
+          echo "::notice::Successfully dispatched update event to mcp-compose-bundle"
+          echo "::notice::SHA: ${{ github.sha }}"
+          echo "::notice::Ref: ${{ github.ref }}"
