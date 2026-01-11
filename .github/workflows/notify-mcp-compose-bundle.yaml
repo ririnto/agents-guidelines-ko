@@ -1,0 +1,30 @@
+name: Notify mcp-compose-bundle
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  notify-parent-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger mcp-compose-bundle submodule update workflow
+        env:
+          GH_TOKEN: ${{ secrets.MCP_COMPOSE_BUNDLE_PAT }}
+        run: |-
+          gh workflow run update-guidelines-submodule.yaml \
+            -f repository=ririnto/agents-guidelines-ko \
+            -f ref=${{ github.ref_name }} \
+            -f sha=${{ github.sha }} \
+            --repo ririnto/mcp-compose-bundle
+
+      - name: Verify workflow dispatch
+        if: success()
+        run: |-
+          echo "::notice::Successfully triggered update-guidelines-submodule workflow"
+          echo "::notice::SHA: ${{ github.sha }}"
+          echo "::notice::Ref: ${{ github.ref_name }}"
