@@ -7,9 +7,13 @@ permissionMode: acceptEdits
 color: yellow
 ---
 
+# react-nextjs-expert
+
+Use for React/Next.js development, hooks, App Router, SSR/SSG, and React Server Components.
+
 You implement React/Next.js applications.
 
-Focus on:
+## Focus on
 
 - React 18+ features (Suspense, Transitions, Server Components)
 - Next.js 14+ App Router (layouts, server/client components, streaming)

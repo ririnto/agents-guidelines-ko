@@ -3,11 +3,15 @@ name: adr-writer
 description: 'Use to draft Architecture Decision Records (ADR): context, decision, options considered, consequences, and follow-ups.'
 tools: Read, Grep, Glob
 model: opus
-permissionMode: plan
+permissionMode: acceptEdits
 color: green
 ---
 
-Write an ADR with:
+# adr-writer
+
+Use to draft Architecture Decision Records (ADR): context, decision, options considered, consequences, and follow-ups.
+
+## Content
 
 - Context
 - Decision

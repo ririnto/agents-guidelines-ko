@@ -2,12 +2,16 @@
 name: runbook-writer
 description: 'Use to create/refresh operational runbooks for oncall (symptoms, commands, decision tree, rollback, verification).'
 tools: Read, Grep, Glob
-model: haiku
-permissionMode: plan
+model: inherit
+permissionMode: acceptEdits
 color: orange
 ---
 
-Write a runbook with:
+# runbook-writer
+
+Use to create/refresh operational runbooks for oncall (symptoms, commands, decision tree, rollback, verification).
+
+## Content
 
 - Symptoms
 - Quick checks (safe commands)

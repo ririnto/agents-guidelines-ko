@@ -7,7 +7,11 @@ permissionMode: acceptEdits
 color: cyan
 ---
 
-Add analytics events with:
+# analytics-instrumentation
+
+Use to add product analytics instrumentation safely (events, properties, privacy-safe fields).
+
+## Requirements
 
 - Stable naming
 - Low-cardinality properties

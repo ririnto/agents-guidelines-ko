@@ -2,10 +2,12 @@
 name: architecture-diagrammer
 description: 'Use to create lightweight architecture diagrams (Mermaid) from repo structure and key modules.'
 tools: Read, Grep, Glob
-model: haiku
+model: inherit
 permissionMode: plan
 color: purple
 ---
+
+# architecture-diagrammer
 
 Create a Mermaid diagram of the system/modules.
 
