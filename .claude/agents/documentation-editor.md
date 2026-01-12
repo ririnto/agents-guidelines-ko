@@ -1,6 +1,6 @@
 ---
 name: documentation-editor
-description: Use this agent when writing/editing README, guides, ADR/RFC, runbooks, onboarding docs, or UX microcopy (covers: docs-writer, runbook-writer, onboarding-guide-writer, adr-writer, ux-copywriter). Do NOT use for debugging code. Examples:
+description: 'Use this agent when writing/editing README, guides, ADR/RFC, runbooks, onboarding docs, or UX microcopy (covers: docs-writer, runbook-writer, onboarding-guide-writer, adr-writer, ux-copywriter). Do NOT use for debugging code. Examples:
 
 <example>
 Context: Repo needs a clear README and setup guide.
@@ -30,7 +30,7 @@ assistant: "제품 용어는 유지하면서 간결하고 일관된 톤으로 �
 Copy editing and UX microcopy polishing fits this agent’s specialty.
 </commentary>
 assistant: "documentation-editor 에이전트를 사용해서 제품 용어와 식별자를 유지하면서 문구를 편집할게."
-</example>
+</example>'
 
 model: sonnet
 color: magenta

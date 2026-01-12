@@ -1,6 +1,6 @@
 ---
 name: frontend-engineer
-description: Use this agent when you need frontend work in TS/React/Next.js/Vue/Nuxt (covers: typescript-expert, react-nextjs-expert, vue-nuxt-expert). Do NOT use for backend schema design. Examples:
+description: 'Use this agent when you need frontend work in TS/React/Next.js/Vue/Nuxt (covers: typescript-expert, react-nextjs-expert, vue-nuxt-expert). Do NOT use for backend schema design. Examples:
 
 <example>
 Context: React/Next.js feature request with TypeScript types.
@@ -30,7 +30,7 @@ assistant: "리렌더 원인/키/메모이제이션/가상화 여부를 체크�
 Frontend performance diagnosis and targeted optimizations are this agent’s domain.
 </commentary>
 assistant: "frontend-engineer 에이전트를 사용해서 렌더링 병목을 식별하고 최적화를 제안/구현할게."
-</example>
+</example>'
 
 model: sonnet
 color: green

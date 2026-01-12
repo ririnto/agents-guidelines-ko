@@ -1,6 +1,6 @@
 ---
 name: security-and-compliance-auditor
-description: Use this agent when you need defensive security/compliance review, dependency risk checks, and hardening (covers: security-auditor, compliance-auditor, dependency-manager, red-team). Do NOT use for offensive exploitation. Examples:
+description: 'Use this agent when you need defensive security/compliance review, dependency risk checks, and hardening (covers: security-auditor, compliance-auditor, dependency-manager, red-team). Do NOT use for offensive exploitation. Examples:
 
 <example>
 Context: User requests security review of recent code changes.
@@ -30,7 +30,7 @@ assistant: "PII 식별→마스킹/토큰화→보관 정책/접근 통제 관�
 PII handling and logging hygiene relates to compliance risk mitigation.
 </commentary>
 assistant: "security-and-compliance-auditor 에이전트를 사용해서 PII 노출을 검토하고 규정을 준수하는 로깅 관행을 추천할게."
-</example>
+</example>'
 
 model: opus
 color: red

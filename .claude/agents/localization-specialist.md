@@ -1,6 +1,6 @@
 ---
 name: localization-specialist
-description: Use this agent when you need i18n/localization work: keys, placeholders, pluralization, and translation review (covers: i18n-localization, translation-reviewer). Do NOT use for general documentation writing. Examples:
+description: 'Use this agent when you need i18n/localization work: keys, placeholders, pluralization, and translation review (covers: i18n-localization, translation-reviewer). Do NOT use for general documentation writing. Examples:
 
 <example>
 
@@ -32,7 +32,7 @@ assistant: "제품 용어는 유지하면서 의미가 흔들리지 않게 톤�
 Translation review and terminology consistency fits localization specialization.
 </commentary>
 assistant: "localization-specialist 에이전트를 사용해서 edit translations and document terminology decisions 작업을 진행할게."
-</example>
+</example>'
 
 model: haiku
 color: magenta

@@ -1,8 +1,6 @@
 ---
 name: project-coordinator
-description: Use this agent when you need project planning, task breakdown, sequencing, or rollout/feature-flag strategy (covers: project-coordinator, feature-flag-manager). Do NOT use for implementing code. Examples:
-
-<example>
+description: 'Use this agent when you need project planning, task breakdown, sequencing, or rollout/feature-flag strategy (covers: project-coordinator, feature-flag-manager). Do NOT use for implementing code. Examples:
 
 <example>
 Context: User needs a plan for a medium-sized feature.
@@ -32,7 +30,7 @@ assistant: "Additive 변경→백필→듀얼라이트→스위치오버→정�
 Sequencing complex migrations is coordination work requiring careful planning.
 </commentary>
 assistant: "project-coordinator 에이전트를 사용해서 안전하고 단계적인 마이그레이션 계획을 개요로 작성할게."
-</example>
+</example>'
 
 model: inherit
 color: cyan

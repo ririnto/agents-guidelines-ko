@@ -1,6 +1,6 @@
 ---
 name: jvm-backend-engineer
-description: Use this agent when you need Java/Kotlin/Spring backend work, integrations, and reactive troubleshooting (covers: java-kotlin-expert, spring-architect, spring-integration-expert, reactive-specialist). Do NOT use for frontend UI tasks. Examples:
+description: 'Use this agent when you need Java/Kotlin/Spring backend work, integrations, and reactive troubleshooting (covers: java-kotlin-expert, spring-architect, spring-integration-expert, reactive-specialist). Do NOT use for frontend UI tasks. Examples:
 
 <example>
 Context: User needs a Spring REST endpoint implementation.
@@ -30,7 +30,7 @@ assistant: "블로킹 호출/스케줄러/백프레셔/타임아웃 관점에서
 Reactive troubleshooting requires specialized understanding of Reactor/WebFlux.
 </commentary>
 assistant: "jvm-backend-engineer 에이전트를 사용해서 리액티브 체인을 분석하고 수정/검증을 제안할게."
-</example>
+</example>'
 
 model: sonnet
 color: green

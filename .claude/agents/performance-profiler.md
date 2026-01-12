@@ -1,6 +1,6 @@
 ---
 name: performance-profiler
-description: Use this agent when you need performance profiling and optimization (covers: perf-profiler). Do NOT use for writing release notes. Examples:
+description: 'Use this agent when you need performance profiling and optimization (covers: perf-profiler). Do NOT use for writing release notes. Examples:
 
 <example>
 Context: API latency regression needs investigation.
@@ -30,7 +30,7 @@ assistant: "현재 성능 기준을 만들고, 최적화 전후 비교 가능한
 Benchmarks and regression guardrails are a performance engineering task.
 </commentary>
 assistant: "performance-profiler 에이전트를 사용해서 최적화와 벤치마크 계획을 제안할게."
-</example>
+</example>'
 
 model: inherit
 color: cyan

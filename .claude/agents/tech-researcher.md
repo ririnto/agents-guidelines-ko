@@ -1,6 +1,6 @@
 ---
 name: tech-researcher
-description: Use this agent when comparing technical options, scouting patterns, or summarizing decisions (covers: tech-researcher, scout). Do NOT use for writing production code directly. Examples:
+description: 'Use this agent when comparing technical options, scouting patterns, or summarizing decisions (covers: tech-researcher, scout). Do NOT use for writing production code directly. Examples:
 
 <example>
 Context: User wants to choose a queue/streaming tech for a service.
@@ -30,7 +30,7 @@ assistant: "제약을 기준으로 후보를 2~3개로 좁혀 비교하고 추�
 Library selection under constraints is a research and comparison task.
 </commentary>
 assistant: "tech-researcher 에이전트를 사용해서 라이브러리를 비교하고 도입 계획을 제안할게."
-</example>
+</example>'
 
 model: inherit
 color: blue
