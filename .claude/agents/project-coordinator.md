@@ -1,6 +1,8 @@
 ---
 name: project-coordinator
-description: Use this agent when you need project planning, task breakdown, sequencing, or rollout/feature-flag strategy (covers: project-coordinator, feature-flag-manager). Do NOT use for implementing code. Examples: <example>
+description: Use this agent when you need project planning, task breakdown, sequencing, or rollout/feature-flag strategy (covers: project-coordinator, feature-flag-manager). Do NOT use for implementing code. Examples:
+
+<example>
 
 <example>
 Context: User needs a plan for a medium-sized feature.

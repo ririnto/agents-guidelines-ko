@@ -1,6 +1,8 @@
 ---
 name: code-reviewer
-description: Use this agent when reviewing code/PRs for correctness, edge cases, security implications, and maintainability (covers: code-reviewer). Do NOT use to implement features or refactor; use feature-implementer/refactor-and-lint. Examples: <example>
+description: Use this agent when reviewing code/PRs for correctness, edge cases, security implications, and maintainability (covers: code-reviewer). Do NOT use to implement features or refactor; use feature-implementer/refactor-and-lint. Examples:
+
+<example>
 
 <example>
 Context: User has a PR touching business logic and error handling.

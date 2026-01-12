@@ -1,6 +1,8 @@
 ---
 name: incident-and-release-comms
-description: Use this agent when writing incident or release communications (covers: incident-comms, release-comms). Do NOT use for incident technical debugging; use devops-sre/bug-triage. Examples: <example>
+description: Use this agent when writing incident or release communications (covers: incident-comms, release-comms). Do NOT use for incident technical debugging; use devops-sre/bug-triage. Examples:
+
+<example>
 
 <example>
 Context: User needs an initial incident announcement.

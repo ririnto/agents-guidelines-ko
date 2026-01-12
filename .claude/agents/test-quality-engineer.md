@@ -1,6 +1,8 @@
 ---
 name: test-quality-engineer
-description: Use this agent when tests fail, need new tests, or flakiness/coverage issues appear (covers: test-runner, flaky-test-hunter). Do NOT use for writing release notes. Examples: <example>
+description: Use this agent when tests fail, need new tests, or flakiness/coverage issues appear (covers: test-runner, flaky-test-hunter). Do NOT use for writing release notes. Examples:
+
+<example>
 
 <example>
 Context: Test failure after a change needs diagnosis.

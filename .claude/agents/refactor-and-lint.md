@@ -1,6 +1,8 @@
 ---
 name: refactor-and-lint
-description: Use this agent when you need refactoring, lint/format fixes, and behavior-preserving cleanup (covers: lint-fixer, refactor-coach). Do NOT use for architecture design. Examples: <example>
+description: Use this agent when you need refactoring, lint/format fixes, and behavior-preserving cleanup (covers: lint-fixer, refactor-coach). Do NOT use for architecture design. Examples:
+
+<example>
 
 <example>
 Context: User wants to fix lint errors after changes.

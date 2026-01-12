@@ -1,6 +1,8 @@
 ---
 name: localization-specialist
-description: Use this agent when you need i18n/localization work: keys, placeholders, pluralization, and translation review (covers: i18n-localization, translation-reviewer). Do NOT use for general documentation writing. Examples: <example>
+description: Use this agent when you need i18n/localization work: keys, placeholders, pluralization, and translation review (covers: i18n-localization, translation-reviewer). Do NOT use for general documentation writing. Examples:
+
+<example>
 
 <example>
 Context: User adds new UI strings and needs i18n keys.

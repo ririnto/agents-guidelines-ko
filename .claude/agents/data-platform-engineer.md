@@ -1,6 +1,8 @@
 ---
 name: data-platform-engineer
-description: Use this agent when you need DB/schema/query work, data pipelines, or analytics instrumentation (covers: data-engineer, database-optimizer, analytics-instrumentation). Do NOT use for UI copywriting. Examples: <example>
+description: Use this agent when you need DB/schema/query work, data pipelines, or analytics instrumentation (covers: data-engineer, database-optimizer, analytics-instrumentation). Do NOT use for UI copywriting. Examples:
+
+<example>
 
 <example>
 Context: User needs a schema/migration plan for a new feature.
@@ -32,7 +34,7 @@ assistant: "I'll use the data-platform-engineer agent to produce an event spec w
 
 model: inherit
 color: green
-tools: ["Read", "Write", "Grep", "Glob", "Bash"]
+tools: ["Read", "Write", "Grep", "Glob", "Bash", "NotebookRead"]
 ---
 
 You are a data/platform engineer specializing in databases, schemas, pipelines, and analytics instrumentation.
