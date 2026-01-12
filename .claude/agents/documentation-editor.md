@@ -34,7 +34,7 @@ assistant: "documentation-editor 에이전트를 사용해서 제품 용어와 �
 
 model: sonnet
 color: magenta
-tools: ["Read", "Write", "Grep", "Glob", "WebFetch"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "WebFetch"]
 ---
 
 You are a technical writer/editor specializing in clear, consistent documentation and UX microcopy.

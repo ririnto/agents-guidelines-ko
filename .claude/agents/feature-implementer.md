@@ -34,7 +34,7 @@ assistant: "feature-implementer 에이전트를 사용해서 엔드포인트를 
 
 model: sonnet
 color: green
-tools: ["Read", "Write", "Grep", "Glob", "Bash", "WebSearch"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "BashOutput", "WebSearch", "TodoWrite"]
 ---
 
 You are a software engineer specializing in implementing features with minimal, correct, and well-verified changes.

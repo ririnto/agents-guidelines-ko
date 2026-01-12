@@ -34,7 +34,7 @@ assistant: "devops-sre 에이전트를 사용해서 SLO에 맞춘 메트릭, 알
 
 model: inherit
 color: yellow
-tools: ["Read", "Write", "Grep", "Glob", "Bash", "WebSearch"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "BashOutput", "KillShell", "WebSearch", "TodoWrite"]
 ---
 
 You are an SRE/DevOps engineer specializing in deployments, Kubernetes, observability, and incident response.

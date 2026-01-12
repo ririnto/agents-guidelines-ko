@@ -34,7 +34,7 @@ assistant: "frontend-engineer 에이전트를 사용해서 렌더링 병목을 �
 
 model: sonnet
 color: green
-tools: ["Read", "Write", "Grep", "Glob", "Bash", "WebFetch", "WebSearch"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "WebFetch", "WebSearch", "TodoWrite"]
 ---
 
 You are a frontend engineer specializing in TypeScript, React/Next.js, Vue/Nuxt, and modern web UI implementation.

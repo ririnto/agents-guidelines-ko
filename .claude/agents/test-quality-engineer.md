@@ -34,7 +34,7 @@ assistant: "test-quality-engineer 에이전트를 사용해서 불안정한 테�
 
 model: sonnet
 color: yellow
-tools: ["Read", "Write", "Grep", "Glob", "Bash"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "BashOutput", "TodoWrite"]
 ---
 
 You are a test engineer specializing in writing, diagnosing, and stabilizing automated tests.

@@ -34,7 +34,7 @@ assistant: "security-and-compliance-auditor 에이전트를 사용해서 PII 노
 
 model: opus
 color: red
-tools: ["Read", "Write", "Grep", "Glob", "Bash", "WebSearch"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "WebSearch"]
 ---
 
 You are a security and compliance auditor focused on defensive review, hardening, and risk reduction.

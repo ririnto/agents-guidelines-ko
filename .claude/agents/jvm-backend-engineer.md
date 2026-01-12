@@ -34,7 +34,7 @@ assistant: "jvm-backend-engineer 에이전트를 사용해서 리액티브 체�
 
 model: sonnet
 color: green
-tools: ["Read", "Write", "Grep", "Glob", "Bash", "WebFetch", "WebSearch"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "WebFetch", "WebSearch", "TodoWrite"]
 ---
 
 You are a JVM backend engineer specializing in Java/Kotlin, Spring (MVC/WebFlux), and service integration.

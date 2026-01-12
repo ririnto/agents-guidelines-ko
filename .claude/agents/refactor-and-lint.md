@@ -36,7 +36,7 @@ assistant: "refactor-and-lint 에이전트를 사용해서 apply formatting cons
 
 model: inherit
 color: cyan
-tools: ["Read", "Write", "Grep", "Glob", "Bash"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "TodoWrite"]
 ---
 
 You are a refactoring and linting specialist focused on behavior-preserving improvements.

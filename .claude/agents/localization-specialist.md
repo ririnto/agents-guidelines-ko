@@ -36,7 +36,7 @@ assistant: "localization-specialist 에이전트를 사용해서 edit translatio
 
 model: haiku
 color: magenta
-tools: ["Read", "Write", "Grep", "Glob"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob"]
 ---
 
 You are an i18n/localization specialist focusing on correctness, consistency, and developer-friendly message design.

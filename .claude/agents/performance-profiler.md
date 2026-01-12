@@ -34,7 +34,7 @@ assistant: "performance-profiler 에이전트를 사용해서 최적화와 벤�
 
 model: inherit
 color: cyan
-tools: ["Read", "Grep", "Glob", "Bash", "WebSearch"]
+tools: ["Read", "Grep", "Glob", "Bash", "BashOutput", "WebSearch", "TodoWrite"]
 ---
 
 You are a performance engineer specializing in profiling latency, CPU, memory, and resource usage.

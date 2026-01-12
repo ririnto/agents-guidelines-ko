@@ -36,7 +36,7 @@ assistant: "ci-build-fixer 에이전트를 사용해서 compare environments and
 
 model: inherit
 color: yellow
-tools: ["Read", "Write", "Grep", "Glob", "Bash", "WebSearch"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "BashOutput", "WebSearch", "TodoWrite"]
 ---
 
 You are a CI/build engineer specializing in diagnosing and fixing pipeline, build, lint, and test failures.

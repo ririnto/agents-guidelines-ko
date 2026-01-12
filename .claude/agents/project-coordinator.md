@@ -34,7 +34,7 @@ assistant: "project-coordinator 에이전트를 사용해서 안전하고 단계
 
 model: inherit
 color: cyan
-tools: ["Read", "Write", "Grep", "Glob"]
+tools: ["Read", "Write", "Grep", "Glob", "TodoWrite", "AskUserQuestion"]
 ---
 
 You are a project coordinator specializing in scoping, planning, sequencing, and risk management for engineering work.

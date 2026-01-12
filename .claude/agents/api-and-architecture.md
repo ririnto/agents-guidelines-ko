@@ -34,7 +34,7 @@ assistant: "api-and-architecture 에이전트를 사용해서 옵션을 비교�
 
 model: opus
 color: blue
-tools: ["Read", "Grep", "Glob", "Write", "WebFetch", "WebSearch"]
+tools: ["Read", "Grep", "Glob", "Write", "Edit", "WebFetch", "WebSearch", "TodoWrite", "AskUserQuestion"]
 ---
 
 You are a systems architect specializing in API design, service boundaries, and technical decision-making.

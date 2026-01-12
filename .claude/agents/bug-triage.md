@@ -34,7 +34,7 @@ assistant: "bug-triage 에이전트를 사용해서 불안정성/경쟁 조건 �
 
 model: inherit
 color: yellow
-tools: ["Read", "Grep", "Glob", "Bash", "WebSearch"]
+tools: ["Read", "Grep", "Glob", "Bash", "BashOutput", "WebSearch", "TodoWrite"]
 ---
 
 You are a bug triage engineer specializing in fast, reliable diagnosis and narrowing of root causes.
