@@ -43,14 +43,39 @@ python setup-agents.py
 
 ### Agents
 
-`.claude/agents/` is for Claude; `.github/agents/` is for GitHub Copilot/Codex. Representative agents:
+`.claude/agents/` is for Claude; `.github/agents/` is for GitHub Copilot/Codex.
+
+#### Claude Agents
+
+| Agent | Purpose | Tools |
+| --- | --- | --- |
+| [api-and-architecture](.claude/agents/api-and-architecture.md) | API design and architecture analysis | Read, Write, Grep, Glob |
+| [bug-triage](.claude/agents/bug-triage.md) | Bug classification and prioritization | Read, Grep, Glob, Bash |
+| [ci-build-fixer](.claude/agents/ci-build-fixer.md) | CI build failure analysis and fix | Read, Write, Grep, Glob, Bash |
+| [code-reviewer](.claude/agents/code-reviewer.md) | Code review | Read, Grep, Glob |
+| [data-platform-engineer](.claude/agents/data-platform-engineer.md) | Data platform design | Read, Write, Grep, Glob, Bash |
+| [devops-sre](.claude/agents/devops-sre.md) | DevOps/SRE tasks | Read, Write, Grep, Glob, Bash |
+| [documentation-editor](.claude/agents/documentation-editor.md) | Documentation writing and editing | Read, Write, Grep, Glob |
+| [feature-implementer](.claude/agents/feature-implementer.md) | Feature implementation | Read, Write, Grep, Glob, Bash |
+| [frontend-engineer](.claude/agents/frontend-engineer.md) | Frontend development | Read, Write, Grep, Glob, Bash |
+| [incident-and-release-comms](.claude/agents/incident-and-release-comms.md) | Incident and release communication | Read, Write, Grep, Glob |
+| [jvm-backend-engineer](.claude/agents/jvm-backend-engineer.md) | JVM backend development | Read, Write, Grep, Glob, Bash |
+| [localization-specialist](.claude/agents/localization-specialist.md) | Localization | Read, Write, Grep, Glob |
+| [performance-profiler](.claude/agents/performance-profiler.md) | Performance profiling | Read, Write, Grep, Glob, Bash |
+| [project-coordinator](.claude/agents/project-coordinator.md) | Project coordination | Read, Write, Grep, Glob |
+| [refactor-and-lint](.claude/agents/refactor-and-lint.md) | Refactoring and linting | Read, Write, Grep, Glob |
+| [security-and-compliance-auditor](.claude/agents/security-and-compliance-auditor.md) | Security and compliance audit | Read, Write, Grep, Glob, Bash |
+| [tech-researcher](.claude/agents/tech-researcher.md) | Technical research | Read, Write, Grep, Glob |
+| [test-quality-engineer](.claude/agents/test-quality-engineer.md) | Test quality improvement | Read, Write, Grep, Glob, Bash |
+
+#### GitHub Copilot/Codex Agents
 
 | Agent | Purpose | MCP/Tools (examples) |
 | --- | --- | --- |
-| [code-reviewer](.claude/agents/code-reviewer.md) | Code review | git, serena |
-| [implementer](.claude/agents/implementer.md) | Multi-file implementation | serena, jetbrains, git |
-| [single-file-implementer](.claude/agents/single-file-implementer.md) | Single-file edits | jetbrains, serena |
-| [test-runner](.claude/agents/test-runner.md) | Test run/fix | jetbrains, bash |
+| [code-reviewer](.github/agents/code-reviewer.agent.md) | Code review | git, serena |
+| [documentation-writer](.github/agents/documentation-writer.agent.md) | Documentation writing | markitdown, serena |
+| [refactoring-expert](.github/agents/refactoring-expert.agent.md) | Refactoring | serena, jetbrains |
+| [test-generator](.github/agents/test-generator.agent.md) | Test generation | serena, jetbrains |
 
 ### Skills
 
@@ -168,7 +193,7 @@ Uses only the MCP servers defined in `copilot-instructions.md`.
 - [Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) - Configure custom
   instructions for VS Code Copilot
 - [Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills) - Develop Copilot agent skills
-- [github/awesome-copilot](https://github.com/github/awesome-copilot) - Awesome Copilot resources
+- [github/awesome-copilot](https://github.com/github.com/github/awesome-copilot) - Awesome Copilot resources
 
 #### Claude
 

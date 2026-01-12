@@ -43,14 +43,39 @@ python setup-agents.py
 
 ### Agents
 
-`.claude/agents/`는 Claude용, `.github/agents/`는 GitHub Copilot/Codex용 에이전트가 있습니다. 대표 에이전트:
+`.claude/agents/`는 Claude용, `.github/agents/`는 GitHub Copilot/Codex용 에이전트가 있습니다.
+
+#### Claude Agents
+
+| 에이전트 | 용도 | Tools |
+| --- | --- | --- |
+| [api-and-architecture](.claude/agents/api-and-architecture.md) | API 설계 및 아키텍처 분석 | Read, Write, Grep, Glob |
+| [bug-triage](.claude/agents/bug-triage.md) | 버그 분류 및 우선순위 지정 | Read, Grep, Glob, Bash |
+| [ci-build-fixer](.claude/agents/ci-build-fixer.md) | CI 빌드 실패 분석 및 수정 | Read, Write, Grep, Glob, Bash |
+| [code-reviewer](.claude/agents/code-reviewer.md) | 코드 리뷰 | Read, Grep, Glob |
+| [data-platform-engineer](.claude/agents/data-platform-engineer.md) | 데이터 플랫폼 설계 | Read, Write, Grep, Glob, Bash |
+| [devops-sre](.claude/agents/devops-sre.md) | DevOps/SRE 작업 | Read, Write, Grep, Glob, Bash |
+| [documentation-editor](.claude/agents/documentation-editor.md) | 문서 작성 및 편집 | Read, Write, Grep, Glob |
+| [feature-implementer](.claude/agents/feature-implementer.md) | 기능 구현 | Read, Write, Grep, Glob, Bash |
+| [frontend-engineer](.claude/agents/frontend-engineer.md) | 프론트엔드 개발 | Read, Write, Grep, Glob, Bash |
+| [incident-and-release-comms](.claude/agents/incident-and-release-comms.md) | 인시던트 및 릴리스 커뮤니케이션 | Read, Write, Grep, Glob |
+| [jvm-backend-engineer](.claude/agents/jvm-backend-engineer.md) | JVM 백엔드 개발 | Read, Write, Grep, Glob, Bash |
+| [localization-specialist](.claude/agents/localization-specialist.md) | 로컬라이제이션 | Read, Write, Grep, Glob |
+| [performance-profiler](.claude/agents/performance-profiler.md) | 성능 프로파일링 | Read, Write, Grep, Glob, Bash |
+| [project-coordinator](.claude/agents/project-coordinator.md) | 프로젝트 조정 | Read, Write, Grep, Glob |
+| [refactor-and-lint](.claude/agents/refactor-and-lint.md) | 리팩토링 및 린트 | Read, Write, Grep, Glob |
+| [security-and-compliance-auditor](.claude/agents/security-and-compliance-auditor.md) | 보안 및 컴플라이언스 감사 | Read, Write, Grep, Glob, Bash |
+| [tech-researcher](.claude/agents/tech-researcher.md) | 기술 연구 | Read, Write, Grep, Glob |
+| [test-quality-engineer](.claude/agents/test-quality-engineer.md) | 테스트 품질 개선 | Read, Write, Grep, Glob, Bash |
+
+#### GitHub Copilot/Codex Agents
 
 | 에이전트 | 용도 | MCP/도구 예시 |
 | --- | --- | --- |
-| [code-reviewer](.claude/agents/code-reviewer.md) | 코드 리뷰 | git, serena |
-| [implementer](.claude/agents/implementer.md) | 다중 파일 구현 | serena, jetbrains, git |
-| [single-file-implementer](.claude/agents/single-file-implementer.md) | 단일 파일 수정 | jetbrains, serena |
-| [test-runner](.claude/agents/test-runner.md) | 테스트 실행/수정 | jetbrains, bash |
+| [code-reviewer](.github/agents/code-reviewer.agent.md) | 코드 리뷰 | git, serena |
+| [documentation-writer](.github/agents/documentation-writer.agent.md) | 문서 작성 | markitdown, serena |
+| [refactoring-expert](.github/agents/refactoring-expert.agent.md) | 리팩토링 | serena, jetbrains |
+| [test-generator](.github/agents/test-generator.agent.md) | 테스트 생성 | serena, jetbrains |
 
 ### Skills
 
@@ -166,7 +191,7 @@ python -m compileall setup-agents.py
 - [Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) - VS Code Copilot
   커스텀 지침 설정
 - [Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills) - Copilot 에이전트 스킬 개발
-- [github/awesome-copilot](https://github.com/github/awesome-copilot) - Copilot 리소스 모음
+- [github/awesome-copilot](https://github.com/github.com/github/awesome-copilot) - Copilot 리소스 모음
 
 #### Claude
 
