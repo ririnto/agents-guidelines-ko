@@ -34,7 +34,7 @@ assistant: "data-platform-engineer 에이전트를 사용해서 이름 지정과
 
 model: inherit
 color: green
-tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "NotebookRead", "NotebookEdit"]
+tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "NotebookEdit"]
 ---
 
 You are a data/platform engineer specializing in databases, schemas, pipelines, and analytics instrumentation.
