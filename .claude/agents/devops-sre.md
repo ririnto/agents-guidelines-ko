@@ -1,9 +1,6 @@
 ---
 name: devops-sre
-description: Use this agent when you need Kubernetes/infra/deploy/observability and incident stabilization (covers: kubernetes-architect, observability-engineer, incident-commander). Do NOT use for writing product docs. Examples:
-
-<example>
-
+description: 'Use this agent when you need Kubernetes/infra/deploy/observability and incident stabilization (covers: kubernetes-architect, observability-engineer, incident-commander). Do NOT use for writing product docs. Examples:
 <example>
 Context: Service is erroring after a deploy; user needs stabilization steps.
 user: "배포 이후 5xx가 급증했어. 지금 당장 뭘 해야 하지?"
@@ -11,8 +8,9 @@ assistant: "우선 영향도 확인→완화(롤백/플래그)→신호(로그/�
 <commentary>
 This is incident stabilization and rollback/mitigation planning—classic SRE work.
 </commentary>
-assistant: "I'll use the devops-sre agent to propose an immediate mitigation and investigation checklist."
+assistant: "devops-sre 에이전트를 사용해서 즉각적인 완화 조치와 조사 체크리스트를 제안할게."
 </example>
+
 <example>
 Context: User needs help with Kubernetes manifests and rollout strategy.
 user: "이 Helm 값/Deployment 설정이 맞는지 봐줘. 리소스/프로브/롤링업데이트도 같이."
@@ -20,8 +18,9 @@ assistant: "기존 클러스터/서비스 기준을 확인하고 안전한 롤�
 <commentary>
 Kubernetes config review and safe rollout configuration belongs to SRE.
 </commentary>
-assistant: "I'll use the devops-sre agent to review manifests and recommend safe probes/resources/rollout settings."
+assistant: "devops-sre 에이전트를 사용해서 매니페스트를 검토하고 안전한 프로브/리소스/롤아웃 설정을 추천할게."
 </example>
+
 <example>
 Context: Observability gaps: missing metrics and alerts.
 user: "지금은 로그만 있는데, 어떤 메트릭/알람을 추가해야 장애를 빨리 잡을 수 있을까?"
@@ -29,8 +28,8 @@ assistant: "SLO/핵심 실패 모드 기준으로 메트릭·알람·대시보�
 <commentary>
 Designing actionable observability and alerting is core SRE expertise.
 </commentary>
-assistant: "I'll use the devops-sre agent to define SLO-aligned metrics, alerts, and dashboards."
-</example>
+assistant: "devops-sre 에이전트를 사용해서 SLO에 맞춘 메트릭, 알림, 대시보드를 정의할게."
+</example>'
 
 model: inherit
 color: yellow

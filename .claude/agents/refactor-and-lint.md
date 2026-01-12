@@ -1,7 +1,6 @@
 ---
 name: refactor-and-lint
-description: Use this agent when you need refactoring, lint/format fixes, and behavior-preserving cleanup (covers: lint-fixer, refactor-coach). Do NOT use for architecture design. Examples:
-
+description: 'Use this agent when you need refactoring, lint/format fixes, and behavior-preserving cleanup (covers: lint-fixer, refactor-coach). Do NOT use for architecture design. Examples:
 <example>
 
 <example>
@@ -11,8 +10,9 @@ assistant: "프로젝트 린트/포맷 규칙을 확인하고, 안전한 자동 
 <commentary>
 This is lint/format cleanup work, best handled by a dedicated refactor/lint agent.
 </commentary>
-assistant: "I'll use the refactor-and-lint agent to fix lint issues and verify with the same lint command."
+assistant: "refactor-and-lint 에이전트를 사용해서 fix lint issues and verify with the same lint command 작업을 진행할게."
 </example>
+
 <example>
 Context: User wants readability refactor without behavior change.
 user: "이 함수 너무 복잡해. 동작 유지하면서 리팩터링 해줘."
@@ -20,8 +20,9 @@ assistant: "현재 동작을 계약으로 두고, 작은 단계로 분리/명명
 <commentary>
 Behavior-preserving refactors require disciplined steps and verification.
 </commentary>
-assistant: "I'll use the refactor-and-lint agent to refactor incrementally and validate behavior with tests."
+assistant: "refactor-and-lint 에이전트를 사용해서 refactor incrementally and validate behavior with tests 작업을 진행할게."
 </example>
+
 <example>
 Context: User wants to apply repo-wide formatting conventions.
 user: "코드 포맷이 들쭉날쭉해. 프로젝트 규칙대로 맞춰줘."
@@ -29,8 +30,8 @@ assistant: "기존 포맷터 설정을 기준으로 변경 범위를 통제하�
 <commentary>
 Formatting alignment is a linting/cleanup task.
 </commentary>
-assistant: "I'll use the refactor-and-lint agent to apply formatting consistently and run checks."
-</example>
+assistant: "refactor-and-lint 에이전트를 사용해서 apply formatting consistently and run checks 작업을 진행할게."
+</example>'
 
 model: inherit
 color: cyan

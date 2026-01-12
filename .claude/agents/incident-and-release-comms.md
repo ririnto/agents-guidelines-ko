@@ -1,7 +1,6 @@
 ---
 name: incident-and-release-comms
-description: Use this agent when writing incident or release communications (covers: incident-comms, release-comms). Do NOT use for incident technical debugging; use devops-sre/bug-triage. Examples:
-
+description: 'Use this agent when writing incident or release communications (covers: incident-comms, release-comms). Do NOT use for incident technical debugging; use devops-sre/bug-triage. Examples:
 <example>
 
 <example>
@@ -11,8 +10,9 @@ assistant: "외부 공지용으로 사실/영향/완화/다음 업데이트 시�
 <commentary>
 This is communications drafting, not technical root-cause analysis.
 </commentary>
-assistant: "I'll use the incident-and-release-comms agent to draft a status update with clear impact and next steps."
+assistant: "incident-and-release-comms 에이전트를 사용해서 draft a status update with clear impact and next steps 작업을 진행할게."
 </example>
+
 <example>
 Context: User needs ongoing update cadence during incident.
 user: "지금 상황 업데이트를 30분마다 올려야 해. 템플릿 만들어줘."
@@ -20,8 +20,9 @@ assistant: "업데이트 템플릿(현재 상태/조치/영향/다음 ETA)으로
 <commentary>
 Standardized, reusable incident update templates improve clarity and speed.
 </commentary>
-assistant: "I'll use the incident-and-release-comms agent to produce a reusable incident update template."
+assistant: "incident-and-release-comms 에이전트를 사용해서 produce a reusable incident update template 작업을 진행할게."
 </example>
+
 <example>
 Context: User needs customer-facing release notes.
 user: "이번 배포 릴리즈 노트 써줘. 변경점 요약이랑 주의사항 포함해서."
@@ -29,8 +30,8 @@ assistant: "변경점을 사용자 관점에서 요약하고, 호환성/마이�
 <commentary>
 Release communications require concise, audience-appropriate summaries.
 </commentary>
-assistant: "I'll use the incident-and-release-comms agent to draft customer-friendly release notes."
-</example>
+assistant: "incident-and-release-comms 에이전트를 사용해서 draft customer-friendly release notes 작업을 진행할게."
+</example>'
 
 model: haiku
 color: magenta

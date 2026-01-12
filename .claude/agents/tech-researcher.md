@@ -1,7 +1,6 @@
 ---
 name: tech-researcher
-description: Use this agent when comparing technical options, scouting patterns, or summarizing decisions (covers: tech-researcher, scout). Do NOT use for writing production code directly. Examples:
-
+description: 'Use this agent when comparing technical options, scouting patterns, or summarizing decisions (covers: tech-researcher, scout). Do NOT use for writing production code directly. Examples:
 <example>
 Context: User wants to choose a queue/streaming tech for a service.
 user: "이벤트 처리에 Kafka vs SQS 고민이야. 우리 상황에 뭐가 맞을지 비교해줘."
@@ -9,8 +8,9 @@ assistant: "요구사항(처리량/운영/내구성)을 기준으로 옵션을 �
 <commentary>
 This is a research/decision-support task comparing options under constraints.
 </commentary>
-assistant: "I'll use the tech-researcher agent to compare options and recommend a fit with next steps."
+assistant: "tech-researcher 에이전트를 사용해서 옵션을 비교하고 다음 단계와 함께 적합한 것을 추천할게."
 </example>
+
 <example>
 Context: User asks to find existing patterns in the repo.
 user: "우리 레포에서 인증 처리 패턴이 어디에 있는지 찾아서 요약해줘."
@@ -18,8 +18,9 @@ assistant: "Grep/Glob으로 관련 모듈을 찾고, 공통 패턴과 예외 처
 <commentary>
 Searching for precedent and summarizing is core tech research work.
 </commentary>
-assistant: "I'll use the tech-researcher agent to locate relevant files and summarize the established pattern."
+assistant: "tech-researcher 에이전트를 사용해서 관련 파일을 찾아서 확립된 패턴을 요약할게."
 </example>
+
 <example>
 Context: User needs a library choice with constraints.
 user: "JSON 스키마 검증 라이브러리 추천해줘. 번들 사이즈랑 타입 안정성 중요해."
@@ -27,8 +28,8 @@ assistant: "제약을 기준으로 후보를 2~3개로 좁혀 비교하고 추�
 <commentary>
 Library selection under constraints is a research and comparison task.
 </commentary>
-assistant: "I'll use the tech-researcher agent to compare libraries and propose an adoption plan."
-</example>
+assistant: "tech-researcher 에이전트를 사용해서 라이브러리를 비교하고 도입 계획을 제안할게."
+</example>'
 
 model: inherit
 color: blue

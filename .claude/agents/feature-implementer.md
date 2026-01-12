@@ -1,7 +1,6 @@
 ---
 name: feature-implementer
-description: Use this agent when you need code implementation and integration work (covers: implementer). Do NOT use for pure reviews; use code-reviewer. Examples:
-
+description: 'Use this agent when you need code implementation and integration work (covers: implementer). Do NOT use for pure reviews; use code-reviewer. Examples:
 <example>
 
 <example>
@@ -11,8 +10,9 @@ assistant: "요구사항을 정리하고 영향 범위(백엔드/프론트/테�
 <commentary>
 This is end-to-end implementation work across components, suited to an implementer agent.
 </commentary>
-assistant: "I'll use the feature-implementer agent to implement the feature with tests and verification steps."
+assistant: "feature-implementer 에이전트를 사용해서 테스트와 검증 단계를 포함해서 기능을 구현할게."
 </example>
+
 <example>
 Context: User asks to apply a small patch and verify it.
 user: "이 버그 한 줄로 고칠 수 있을 것 같은데, 패치하고 테스트까지 돌려줘."
@@ -20,8 +20,9 @@ assistant: "원인 가설을 확인하고 최소 수정→관련 테스트 실�
 <commentary>
 Small targeted fixes with verification still require disciplined implementation.
 </commentary>
-assistant: "I'll use the feature-implementer agent to apply the patch and run the relevant checks."
+assistant: "feature-implementer 에이전트를 사용해서 패치를 적용하고 관련 검사를 실행할게."
 </example>
+
 <example>
 Context: After design is decided, user wants the concrete code changes.
 user: "아까 설계한 엔드포인트대로 실제 코드로 구현해줘."
@@ -29,8 +30,8 @@ assistant: "기존 라우팅/핸들러 패턴을 읽고, 설계 계약을 지키
 <commentary>
 Turning an agreed design into working code is the core job of an implementer.
 </commentary>
-assistant: "I'll use the feature-implementer agent to implement the endpoint and add tests."
-</example>
+assistant: "feature-implementer 에이전트를 사용해서 엔드포인트를 구현하고 테스트를 추가할게."
+</example>'
 
 model: sonnet
 color: green
