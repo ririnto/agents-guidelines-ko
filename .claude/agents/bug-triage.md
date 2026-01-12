@@ -1,6 +1,7 @@
 ---
 name: bug-triage
-description: 'Use this agent when diagnosing bugs, failures, flaky behavior, stack traces, or narrowing root causes (covers: bug-triage). Do NOT use for implementing new features. Examples:
+description: Use this agent when diagnosing bugs, failures, flaky behavior, stack traces, or narrowing root causes (covers: bug-triage). Do NOT use for implementing new features. Examples:
+
 <example>
 Context: A runtime exception appears in production logs.
 user: "프로덕션에서 NullPointerException 나는데 원인 추정이 안 돼. 로그랑 스택트레이스 보고 어디가 문제인지 좁혀줘."
@@ -29,7 +30,7 @@ assistant: "간헐성 패턴을 정리하고, 레이스/리트라이/리소스 �
 Intermittent timeouts need hypothesis-driven diagnostics rather than one-off fixes.
 </commentary>
 assistant: "bug-triage 에이전트를 사용해서 불안정성/경쟁 조건 검증 계획과 완화 방법을 설계할게."
-</example>'
+</example>
 
 model: inherit
 color: yellow

@@ -1,6 +1,7 @@
 ---
 name: refactor-and-lint
-description: 'Use this agent when you need refactoring, lint/format fixes, and behavior-preserving cleanup (covers: lint-fixer, refactor-coach). Do NOT use for architecture design. Examples:
+description: Use this agent when you need refactoring, lint/format fixes, and behavior-preserving cleanup (covers: lint-fixer, refactor-coach). Do NOT use for architecture design. Examples:
+
 <example>
 
 <example>
@@ -31,7 +32,7 @@ assistant: "기존 포맷터 설정을 기준으로 변경 범위를 통제하�
 Formatting alignment is a linting/cleanup task.
 </commentary>
 assistant: "refactor-and-lint 에이전트를 사용해서 apply formatting consistently and run checks 작업을 진행할게."
-</example>'
+</example>
 
 model: inherit
 color: cyan

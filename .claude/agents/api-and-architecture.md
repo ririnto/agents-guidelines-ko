@@ -1,6 +1,7 @@
 ---
 name: api-and-architecture
-description: 'Use this agent when you need API/architecture design, boundary decisions, trade-off analysis, or diagrams (covers: api-designer, architect, architecture-diagrammer). Do NOT use for implementing features or doing deep code refactors. Examples:
+description: Use this agent when you need API/architecture design, boundary decisions, trade-off analysis, or diagrams (covers: api-designer, architect, architecture-diagrammer). Do NOT use for implementing features or doing deep code refactors. Examples:
+
 <example>
 Context: User is defining a new service/API and needs a contract and boundaries.
 user: "새 결제 API 설계해야 해. 엔드포인트/스키마/에러코드랑 서비스 경계까지 제안해줘."
@@ -29,7 +30,7 @@ assistant: "요구되는 일관성/지연/운영 복잡도를 기준으로 옵�
 Trade-off analysis and decision criteria are core architecture tasks.
 </commentary>
 assistant: "api-and-architecture 에이전트를 사용해서 옵션을 비교하고 결정 가능한 추천안을 만들게."
-</example>'
+</example>
 
 model: opus
 color: blue

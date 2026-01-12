@@ -1,6 +1,7 @@
 ---
 name: code-reviewer
-description: 'Use this agent when reviewing code/PRs for correctness, edge cases, security implications, and maintainability (covers: code-reviewer). Do NOT use to implement features or refactor; use feature-implementer/refactor-and-lint. Examples:
+description: Use this agent when reviewing code/PRs for correctness, edge cases, security implications, and maintainability (covers: code-reviewer). Do NOT use to implement features or refactor; use feature-implementer/refactor-and-lint. Examples:
+
 <example>
 
 <example>
@@ -31,7 +32,7 @@ assistant: "배포 관점에서 위험도와 롤백 가능성까지 포함해 �
 Pre-release review should emphasize failure modes, monitoring, and safe rollout.
 </commentary>
 assistant: "code-reviewer 에이전트를 사용해서 assess release risk and propose a short verification checklist 작업을 진행할게."
-</example>'
+</example>
 
 model: inherit
 color: blue

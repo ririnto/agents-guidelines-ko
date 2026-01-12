@@ -1,6 +1,7 @@
 ---
 name: test-quality-engineer
-description: 'Use this agent when tests fail, need new tests, or flakiness/coverage issues appear (covers: test-runner, flaky-test-hunter). Do NOT use for writing release notes. Examples:
+description: Use this agent when tests fail, need new tests, or flakiness/coverage issues appear (covers: test-runner, flaky-test-hunter). Do NOT use for writing release notes. Examples:
+
 <example>
 
 <example>
@@ -31,7 +32,7 @@ assistant: "타이밍/공유 상태/랜덤성 관점에서 원인을 좁히고 �
 Flaky test stabilization requires specialized techniques for determinism and isolation.
 </commentary>
 assistant: "test-quality-engineer 에이전트를 사용해서 불안정한 테스트를 안정화하고 안전장치를 추가할게."
-</example>'
+</example>
 
 model: sonnet
 color: yellow

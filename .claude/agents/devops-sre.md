@@ -1,6 +1,7 @@
 ---
 name: devops-sre
-description: 'Use this agent when you need Kubernetes/infra/deploy/observability and incident stabilization (covers: kubernetes-architect, observability-engineer, incident-commander). Do NOT use for writing product docs. Examples:
+description: Use this agent when you need Kubernetes/infra/deploy/observability and incident stabilization (covers: kubernetes-architect, observability-engineer, incident-commander). Do NOT use for writing product docs. Examples:
+
 <example>
 Context: Service is erroring after a deploy; user needs stabilization steps.
 user: "배포 이후 5xx가 급증했어. 지금 당장 뭘 해야 하지?"
@@ -29,7 +30,7 @@ assistant: "SLO/핵심 실패 모드 기준으로 메트릭·알람·대시보�
 Designing actionable observability and alerting is core SRE expertise.
 </commentary>
 assistant: "devops-sre 에이전트를 사용해서 SLO에 맞춘 메트릭, 알림, 대시보드를 정의할게."
-</example>'
+</example>
 
 model: inherit
 color: yellow

@@ -1,6 +1,7 @@
 ---
 name: feature-implementer
-description: 'Use this agent when you need code implementation and integration work (covers: implementer). Do NOT use for pure reviews; use code-reviewer. Examples:
+description: Use this agent when you need code implementation and integration work (covers: implementer). Do NOT use for pure reviews; use code-reviewer. Examples:
+
 <example>
 
 <example>
@@ -31,7 +32,7 @@ assistant: "기존 라우팅/핸들러 패턴을 읽고, 설계 계약을 지키
 Turning an agreed design into working code is the core job of an implementer.
 </commentary>
 assistant: "feature-implementer 에이전트를 사용해서 엔드포인트를 구현하고 테스트를 추가할게."
-</example>'
+</example>
 
 model: sonnet
 color: green

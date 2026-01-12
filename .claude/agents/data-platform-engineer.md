@@ -1,6 +1,7 @@
 ---
 name: data-platform-engineer
-description: 'Use this agent when you need DB/schema/query work, data pipelines, or analytics instrumentation (covers: data-engineer, database-optimizer, analytics-instrumentation). Do NOT use for UI copywriting. Examples:
+description: Use this agent when you need DB/schema/query work, data pipelines, or analytics instrumentation (covers: data-engineer, database-optimizer, analytics-instrumentation). Do NOT use for UI copywriting. Examples:
+
 <example>
 Context: User needs a schema/migration plan for a new feature.
 user: "유저 세그먼트 기능 추가하려고 테이블/인덱스 설계가 필요해. 마이그레이션도 안전하게 제안해줘."
@@ -29,7 +30,7 @@ assistant: "기존 이벤트 규칙을 확인하고, 일관된 이벤트 설계(
 Instrumentation and event taxonomy design is a specialized data responsibility.
 </commentary>
 assistant: "data-platform-engineer 에이전트를 사용해서 이름 지정과 프라이버시 고려사항을 포함한 이벤트 스펙을 만들게."
-</example>'
+</example>
 
 model: inherit
 color: green

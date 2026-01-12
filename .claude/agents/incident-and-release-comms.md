@@ -1,6 +1,7 @@
 ---
 name: incident-and-release-comms
-description: 'Use this agent when writing incident or release communications (covers: incident-comms, release-comms). Do NOT use for incident technical debugging; use devops-sre/bug-triage. Examples:
+description: Use this agent when writing incident or release communications (covers: incident-comms, release-comms). Do NOT use for incident technical debugging; use devops-sre/bug-triage. Examples:
+
 <example>
 
 <example>
@@ -31,7 +32,7 @@ assistant: "변경점을 사용자 관점에서 요약하고, 호환성/마이�
 Release communications require concise, audience-appropriate summaries.
 </commentary>
 assistant: "incident-and-release-comms 에이전트를 사용해서 draft customer-friendly release notes 작업을 진행할게."
-</example>'
+</example>
 
 model: haiku
 color: magenta
