@@ -38,8 +38,7 @@ python setup-agents.py
 
 | 파일 | 설명 |
 | --- | --- |
-| [agent-routing.md](.claude/rules/agent-routing.md) | 서브에이전트 라우팅 규칙 |
-| [language-and-writing.md](.claude/rules/language-and-writing.md) | 기본 출력 언어 및 용어 보존 규칙 |
+| (예정) | Claude 전용 규칙 (현재 비어있음) |
 
 ### Agents
 
@@ -85,7 +84,7 @@ python setup-agents.py
 | [explain-code](.github/skills/explain-code/SKILL.md) | "이 코드 설명해줘" |
 | [generate-tests](.github/skills/generate-tests/SKILL.md) | "테스트 코드 작성해줘" |
 | [implement-code](.github/skills/implement-code/SKILL.md) | "기능 구현해줘" |
-| [refactor](.github/skills/refactor/SKILL.md) | "리팩토링해줘" |
+| [write-markdown](.github/skills/write-markdown/SKILL.md) | "마크다운 작성해줘" |
 | [debug](.github/skills/debug/SKILL.md) | "디버깅해줘" |
 | [conventional-commit](.github/skills/conventional-commit/SKILL.md) | "커밋 메시지 작성" |
 

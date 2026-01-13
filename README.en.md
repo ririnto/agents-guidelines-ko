@@ -38,8 +38,7 @@ python setup-agents.py
 
 | File | Description |
 | --- | --- |
-| [agent-routing.md](.claude/rules/agent-routing.md) | Subagent routing rules |
-| [language-and-writing.md](.claude/rules/language-and-writing.md) | Default language and term preservation |
+| (pending) | Claude-only rules (currently empty) |
 
 ### Agents
 
@@ -85,7 +84,7 @@ python setup-agents.py
 | [explain-code](.github/skills/explain-code/SKILL.md) | "explain this code" |
 | [generate-tests](.github/skills/generate-tests/SKILL.md) | "write tests" |
 | [implement-code](.github/skills/implement-code/SKILL.md) | "implement feature" |
-| [refactor](.github/skills/refactor/SKILL.md) | "refactor this" |
+| [write-markdown](.github/skills/write-markdown/SKILL.md) | "write markdown" |
 | [debug](.github/skills/debug/SKILL.md) | "debug this" |
 | [conventional-commit](.github/skills/conventional-commit/SKILL.md) | "write commit message" |
 
