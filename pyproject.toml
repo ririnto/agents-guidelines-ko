@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agents-guidelines-ko"
-version = "0.1.0"
+version = "0.2.0"
 description = "Tooling for configuring Copilot/CLAUDE/Codex agent instructions."
 authors = [{name = "ririnto"}]
 requires-python = ">=3.11"
@@ -15,11 +15,15 @@ dev = [
     "coverage",
     "pyright",
     "pytest",
+    "pytest-mock",
     "ruff",
 ]
 
+[project.scripts]
+setup-agents = "setup_agents.cli:main"
+
 [tool.pyright]
-include = ["setup-agents.py", "tests/test_setup_agents.py"]
+include = ["setup_agents", "tests"]
 exclude = ["**/.git/**", "**/.venv/**", "**/.serena/**"]
 pythonVersion = "3.11"
 typeCheckingMode = "basic"
