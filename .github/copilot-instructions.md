@@ -16,7 +16,7 @@ excludeAgent:
 - MCP 순서: JetBrains → Serena (context7, fetch 등 병렬)
 - 변경: 필요 충분, 완결, 관련 artifact 같이 갱신
 - 검증: 좁고 관련된 것만 (lint, typecheck, test, build)
-- 출력: 간결 (3-6문장), multi-file 작업 시 Changes, Location, Risks, Validation, Next 템플릿 사용
+- 출력: 간결 (3-6문장), multi-file 작업 시 Changes, Location, Risks, Validation, Next 템플릿 사용 (자세한 형식은 Output Format 섹션의 Response Template 참조)
 - 금지: formatting-only, guess API, secret 포함, lockfile 무단 변경
 - 파괴적 명령: rm -rf, DB migration 등 실행 전 승인 필수
 
@@ -85,6 +85,8 @@ excludeAgent:
 - 질문은 결정을 바꾸는 핵심 정보만
 - AskUserQuestion과 같은 Interactive Question Tool 사용 가능 시 해당 Tool을 통해 사용자에게 질문
 - 순차 답변 필수가 아니면 한 번에 제시
+
+**Interactive Question Tool 사용 불가 시:**
 
 ```markdown
 ## 질문 [N]: [주제]
@@ -155,6 +157,7 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 | markitdown | document conversion to Markdown |
 | git | diffs, history, blame |
 | sequential-thinking | complex multi-step decisions |
+| Ripgrep | fast regex/grep search with advanced options (context, filters, count matches) |
 
 ### MCP Failure Handling
 
@@ -181,7 +184,7 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 
 - Activation: Serena MCP 사용 가능 시 세션 시작에 `activate_project` → `check_onboarding_performed` → 저장된 Metadata `read_memory`
 - Memory: Project Metadata(architecture, conventions) Markdown 형식 관리. section-level heading, 다음 줄 빈 줄. Examples: layout, build, test commands, naming conventions, domain glossary, decision records. Exclude: work logs, temporary TODO
-- 순서: JetBrains 우선, 불가/제한적 시 Serena
+- 순서: JetBrains 우선, 실패 시 Serena fallback
 - 탐색: `get_symbols_overview`, `find_symbol`, `find_referencing_symbols`로 위치, 참조 파악
 - 실패: 범위 축소 또는 JetBrains, 다른 MCP 전환
 - rename: 단일, 간단 참조 `rename_refactoring`, 다중, semantic `rename_symbol`
