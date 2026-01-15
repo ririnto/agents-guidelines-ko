@@ -83,22 +83,28 @@ excludeAgent:
 
 - 질문 개수 제한 없음 (기본 3-10개, 필수 시 무관)
 - 질문은 결정을 바꾸는 핵심 정보만
+- AskUserQuestion과 같은 Interactive Question Tool 사용 가능 시 해당 Tool을 통해 사용자에게 질문
 - 순차 답변 필수가 아니면 한 번에 제시
-- 질문 묶음 마지막에 Next 추가 (영향 범위, 후속 작업, 리스크, 트레이드오프, 검증 포인트)
 
 ```markdown
-질문 `<number>`: `<질문 내용>`
+## 질문 [N]: [주제]
 
-| Option | Description |
-|--------|-------------|
-| A | `<Option A description>` |
-| B | `<Option B description>` |
-| C | `<Option C description>` |
+**Context**: `[관련 섹션 인용]`
 
-Recommended: Option `[X]` - `<reasoning>`
+**질문**: `[구체적인 질문 내용]`
 
-답변 예시: A, B, C, recommend, different answer
-````
+**제안하는 답변**:
+
+| 옵션 | 답변 | 의미/영향 |
+|------|------|-----------|
+| A | [첫 번째 제안] | [이 옵션이 기능에 미치는 영향] |
+| B | [두 번째 제안] | [이 옵션이 기능에 미치는 영향] |
+| C | [세 번째 제안] | [이 옵션이 기능에 미치는 영향] |
+
+**권장**: 옵션 [X] - `[이유]`
+
+**선택**: _[사용자 답변 대기]_
+```
 
 ## Implementation
 
@@ -210,26 +216,34 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 
 ### Response Template
 
-Changes:
+```markdown
+# [상태 헤딩]
 
-- `<what changed>`
+## 변경 요약
 
-Location:
+**수행된 작업**: `[작업 내용을 문장으로 설명]`
 
-- `<files, modules affected>`
+**영향받은 위치**:
+- `[파일/모듈 경로:line 또는 간단한 설명]`
 
-Risks:
+## 리스크 및 주의사항
 
-- `<what might break, what to watch>`
+- `[무엇이 깨질 수 있는지]`
+- `[주의해야 할 부분]`
 
-Validation:
+## 검증 결과
 
-- `<what ran, what was checked>`
-- `<unrelated failures reported without fixing>`
+**실행된 검증**: `[검증 방법]`
+- `[결과]`
 
-Next:
+**무관한 실패**: `[있으면 설명, 없으면 "없음"]`
 
-- `<optional suggestions, follow-up questions>`
+## 다음 단계
+
+- `[선택 사항, 후속 질문 등]`
+```
+
+**상태 헤딩 예시**: 작업 완료, 구현 완료, 분석 완료, 수정 완료, 검증 실패, 요청 불가
 
 ## Guardrails
 
