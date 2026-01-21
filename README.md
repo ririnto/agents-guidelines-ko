@@ -172,7 +172,7 @@ python -m compileall setup-agents.py
 | fetch | 외부 웹 콘텐츠 |
 | markitdown | 문서 변환 |
 | exa | AI 기반 웹 검색 |
-| grep.app | GitHub 코드 검색 |
+| grep-app | GitHub 코드 검색 |
 
 ## Principles
 

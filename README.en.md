@@ -174,7 +174,7 @@ Uses only the MCP servers defined in `copilot-instructions.md`.
 | fetch | External web content |
 | markitdown | Document conversion |
 | exa | AI-powered web search |
-| grep.app | GitHub code search |
+| grep-app | GitHub code search |
 
 ## Principles
 

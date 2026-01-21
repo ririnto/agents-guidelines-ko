@@ -159,7 +159,7 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 | sequential-thinking | complex multi-step decisions |
 | Ripgrep | fast regex/grep search with advanced options (context, filters, count matches) |
 | exa | AI-powered web search |
-| grep.app | GitHub code search |
+| grep-app | GitHub code search |
 
 ### MCP Failure Handling
 
