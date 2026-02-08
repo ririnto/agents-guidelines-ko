@@ -19,12 +19,18 @@ def parse_args() -> argparse.Namespace:
         "targets",
         nargs="*",
         metavar="TARGET",
-        choices=[target.value for target in Target],
         help=f"Target environments to configure: {', '.join(target.value for target in Target)} (default: all)",
     )
     args = parser.parse_args()
+
+    # Validate choices manually to allow empty list
+    valid_targets = [target.value for target in Target]
+    for t in args.targets:
+        if t not in valid_targets:
+            parser.error(f"argument TARGET: invalid choice: '{t}' (choose from {', '.join(valid_targets)})")
+
     if not args.targets:
-        args.targets = [target.value for target in Target]
+        args.targets = valid_targets
     return args
 
 
