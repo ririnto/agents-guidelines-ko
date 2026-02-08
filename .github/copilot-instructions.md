@@ -13,7 +13,6 @@ excludeAgent:
 - Source of Truth: 사용자 입력(chat, ticket, issue) 또는 PRD → repository artifact 순서
 - Convention: 기존 codebase style, naming, structure 최우선
 - Scope: 요청된 것만. 추측하지 않고 질문으로 공백 제거
-- MCP 순서: JetBrains → Serena (context7, fetch 등 병렬)
 - 변경: 필요 충분, 완결, 관련 artifact 같이 갱신
 - 검증: 좁고 관련된 것만 (lint, typecheck, test, build)
 - 출력: 간결 (3-6문장), multi-file 작업 시 Changes, Location, Risks, Validation, Next 템플릿 사용 (자세한 형식은 Output Format 섹션의 Response Template 참조)
@@ -66,7 +65,6 @@ excludeAgent:
 ## Workflow
 
 1. Read:
-   - Serena 활성화: Serena MCP 사용 가능 시 세션 시작에 activate_project → Memory
    - repository instruction → 변경 대상 주변 코드
 2. Confirm: scope 고정, 질문으로 공백 제거, 옵션 결정 제안
 3. Explore: 관련 파일, URL, 로그 읽기, 병렬화
@@ -74,10 +72,6 @@ excludeAgent:
 5. Implement: 개선 아이디어는 옵션 제안, 관련 artifact 같이 갱신
 6. Validation & Recovery: 좁게 검증, 실패 시 최대 2회 자가 수정, 실패 시 원복
 7. Report: 변경, 위치, 검증 요약, 불확실성, 리스크, 다음 작업 포함
-
-## Extended Thinking
-
-복잡한 문제(레거시 리팩토링, 멀티 파일 의존성 변경, 원인 불명 에러, 보안/성능 치명적 로직) 시 단계적 사고 강제. 트리거: `think` → `think hard` → `think harder` → `ultrathink`
 
 ## Questions and Options
 
@@ -151,13 +145,7 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 | MCP | Use For |
 | --- | ------- |
 | Context7 | library, API docs, setup steps |
-| Serena | symbol navigation, usage tracing, bounded edits |
-| JetBrains | inspections, search, refactoring, formatting, run, terminal |
 | fetch | external web content |
-| markitdown | document conversion to Markdown |
-| git | diffs, history, blame |
-| sequential-thinking | complex multi-step decisions |
-| Ripgrep | fast regex/grep search with advanced options (context, filters, count matches) |
 | exa | AI-powered web search |
 | grep-app | GitHub code search |
 
@@ -166,35 +154,6 @@ Agent Tools → IDE-native Tools → MCP Tools → Terminal
 - 동일 파라미터 반복 호출 금지
 - 쿼리, 범위, 도구 변경으로 대체 수단 진행
 - 모든 실패 시 시도 내역 + 부족 정보 정리 후 guidance 요청
-
-### JetBrains MCP Notes
-
-- `projectPath`: absolute path, trailing `/` 권장 (모르면 cwd 사용)
-- 파일 검색 전략:
-  1. `find_files_by_name_keyword`: 정확한 파일명, 강한 추측 시 최우선
-  2. `search_in_files_by_text`: 에러 메시지, 유니크 변수명, 로그 텍스트
-  3. `list_directory_tree`: 구조 파악, 모호한 파일명
-     - 주의: `list_directory_tree`를 root에서 depth 없이 호출하지 않는다(토큰 낭비 방지)
-- 편집: `replace_text_in_file` 실패 가능성 높으므로 `search_in_files_by_text`로 유니크 확인 권장
-- 검사: `get_file_problems`(warning 포함 `errorsOnly: false`, 일부 `reformat_file` auto-fix)
-- 심볼: `get_symbol_info`로 선언, 문서 조회
-- 구조: `get_project_dependencies`, `get_project_modules`
-- 리팩터: `reformat_file`, 안전 rename `rename_refactoring`, 단순 치환 `replace_text_in_file`
-     - 주의: `replace_text_in_file`는 텍스트 파일의 단순 치환에만 사용하고, binary, 대용량, 구조적 refactor에는 사용하지 않는다.
-
-### Serena MCP Notes
-
-- Activation: Serena MCP 사용 가능 시 세션 시작에 `activate_project` → `check_onboarding_performed` → 저장된 Metadata `read_memory`
-- Memory: Project Metadata(architecture, conventions) Markdown 형식 관리. section-level heading, 다음 줄 빈 줄. Examples: layout, build, test commands, naming conventions, domain glossary, decision records. Exclude: work logs, temporary TODO
-- 순서: JetBrains 우선, 실패 시 Serena fallback
-- 탐색: `get_symbols_overview`, `find_symbol`, `find_referencing_symbols`로 위치, 참조 파악
-- 실패: 범위 축소 또는 JetBrains, 다른 MCP 전환
-- rename: 단일, 간단 참조 `rename_refactoring`, 다중, semantic `rename_symbol`
-
-### MarkItDown MCP Notes
-
-- `convert_to_markdown(uri)`로 변환 (`file://` 또는 `https://`)
-- 변환 결과는 분석, 요약, 인용용 intermediate artifact (원문 구조 중요 시 손실 리스크 보고)
 
 ## Terminal Rules
 

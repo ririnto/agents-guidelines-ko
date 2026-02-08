@@ -9,10 +9,7 @@ class VSCodeAgentSetup(AgentSetup):
     base = Path.home() / "Library" / "Application Support" / "Code" / "User"
     env = "VSCODE_USER_DATA"
     assets_subdirs = {
-        Asset.AGENTS: "prompts",
         Asset.SKILLS: None,
-        Asset.PROMPTS: "prompts",
-        Asset.RULES: None,
     }
     special_copies = None
 
@@ -33,19 +30,8 @@ class VSCodeAgentSetup(AgentSetup):
         settings.write(data)
 
         self._copy_common_assets(targets)
-        self._copy_agents(targets)
         self.cleanup_symlinks()
 
     def _copy_common_assets(self, targets: set[Target]) -> None:
-        for asset_type, is_dir in [(Asset.SKILLS, True), (Asset.PROMPTS, False)]:
+        for asset_type, is_dir in [(Asset.SKILLS, True)]:
             self.copy_assets(get_source_path(self.repo_dir, asset_type.value), asset_type, is_dir)
-
-    def _copy_agents(self, targets: set[Target]) -> None:
-        if Target.CLAUDE in targets:
-            return
-
-        self.copy_assets(
-            get_source_path(self.repo_dir, Asset.AGENTS.value),
-            Asset.AGENTS,
-            False,
-        )

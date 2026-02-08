@@ -76,10 +76,10 @@ def test_get_dest_paths_with_subdir():
 
     tool_config = {
         "base": Path("/fake/base"),
-        Asset.AGENTS: "prompts",
+        Asset.SKILLS: "skills",
     }
-    paths = FileUtils.get_dest_paths(Asset.AGENTS, tool_config)
-    assert paths == [Path("/fake/base/prompts")]
+    paths = FileUtils.get_dest_paths(Asset.SKILLS, tool_config)
+    assert paths == [Path("/fake/base/skills")]
 
 
 def test_get_dest_paths_no_subdir():
@@ -87,9 +87,9 @@ def test_get_dest_paths_no_subdir():
 
     tool_config = {
         "base": Path("/fake/base"),
-        Asset.AGENTS: None,
+        Asset.SKILLS: None,
     }
-    paths = FileUtils.get_dest_paths(Asset.AGENTS, tool_config)
+    paths = FileUtils.get_dest_paths(Asset.SKILLS, tool_config)
     assert paths == []
 
 
@@ -98,9 +98,9 @@ def test_get_dest_paths_dot_subdir():
 
     tool_config = {
         "base": Path("/fake/base"),
-        Asset.AGENTS: ".",
+        Asset.SKILLS: ".",
     }
-    paths = FileUtils.get_dest_paths(Asset.AGENTS, tool_config)
+    paths = FileUtils.get_dest_paths(Asset.SKILLS, tool_config)
     assert paths == [Path("/fake/base")]
 
 
@@ -114,9 +114,11 @@ def test_cleanup_old_symlinks(tmp_path):
     (symlink_dir / "symlink.md").symlink_to(tmp_path / "real.md")
     (tmp_path / "real.md").write_text("content")
 
+    from setup_agents.constants import Asset
+
     tool_config = {
         "base": tmp_path,
-        "agents": "assets",
+        Asset.SKILLS: "assets",
     }
     logger = logging.getLogger(__name__)
 

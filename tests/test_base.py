@@ -7,8 +7,8 @@ from setup_agents.constants import Asset, Target, get_source_path
 
 def test_get_source_path():
     repo_dir = Path("/fake/repo")
-    source_path = get_source_path(repo_dir, "agents")
-    assert source_path == repo_dir / ".github" / "agents"
+    source_path = get_source_path(repo_dir, "skills")
+    assert source_path == repo_dir / ".github" / "skills"
 
 
 def test_get_source_path_invalid_key():
@@ -32,10 +32,7 @@ def test_get_source_path_invalid_type():
 
 
 def test_asset_enum():
-    assert Asset.AGENTS == "agents"
     assert Asset.SKILLS == "skills"
-    assert Asset.PROMPTS == "prompts"
-    assert Asset.RULES == "rules"
 
 
 def test_target_enum():

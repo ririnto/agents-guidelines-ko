@@ -9,10 +9,7 @@ class IntelliJAgentSetup(AgentSetup):
     base = Path.home() / ".config" / "github-copilot" / "intellij"
     env = None
     assets_subdirs = {
-        Asset.AGENTS: ".",
         Asset.SKILLS: None,
-        Asset.PROMPTS: ".",
-        Asset.RULES: None,
     }
     special_copies = None
 
@@ -27,7 +24,6 @@ class IntelliJAgentSetup(AgentSetup):
 
         self._copy_instructions()
         self._copy_common_assets(targets)
-        self._copy_agents(targets)
         self.cleanup_symlinks()
 
     def _copy_instructions(self) -> None:
@@ -49,15 +45,5 @@ class IntelliJAgentSetup(AgentSetup):
             FileUtils.backup_and_copy(dest_path, self.backup_dir, source_path, self.logger)
 
     def _copy_common_assets(self, targets: set[Target]) -> None:
-        for asset_type, is_dir in [(Asset.SKILLS, True), (Asset.PROMPTS, False)]:
+        for asset_type, is_dir in [(Asset.SKILLS, True)]:
             self.copy_assets(get_source_path(self.repo_dir, asset_type.value), asset_type, is_dir)
-
-    def _copy_agents(self, targets: set[Target]) -> None:
-        if Target.CLAUDE in targets:
-            return
-
-        self.copy_assets(
-            get_source_path(self.repo_dir, Asset.AGENTS.value),
-            Asset.AGENTS,
-            False,
-        )

@@ -8,10 +8,7 @@ class CodexAgentSetup(AgentSetup):
     base = Path.home() / ".codex"
     env = "CODEX_HOME"
     assets_subdirs = {
-        Asset.AGENTS: "agents",
         Asset.SKILLS: "skills",
-        Asset.PROMPTS: "prompts",
-        Asset.RULES: None,
     }
     special_copies = SPECIAL_INSTRUCTION_COPIES.get("codex")
 
@@ -20,7 +17,6 @@ class CodexAgentSetup(AgentSetup):
             return
 
         self._copy_common_assets(targets)
-        self._copy_agents(targets)
         if self.special_copies:
             self.copy_special_files(self.special_copies)
         self.cleanup_symlinks()
@@ -28,14 +24,5 @@ class CodexAgentSetup(AgentSetup):
     def _copy_common_assets(self, targets: set[Target]) -> None:
         from setup_agents.constants import get_source_path
 
-        for asset_type, is_dir in [(Asset.SKILLS, True), (Asset.PROMPTS, False)]:
+        for asset_type, is_dir in [(Asset.SKILLS, True)]:
             self.copy_assets(get_source_path(self.repo_dir, asset_type.value), asset_type, is_dir)
-
-    def _copy_agents(self, targets: set[Target]) -> None:
-        from setup_agents.constants import get_source_path
-
-        self.copy_assets(
-            get_source_path(self.repo_dir, Asset.AGENTS.value),
-            Asset.AGENTS,
-            False,
-        )

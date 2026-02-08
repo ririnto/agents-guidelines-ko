@@ -3,14 +3,10 @@ from pathlib import Path
 
 CONFIG = {
     "sources": {
-        "agents": Path(".github") / "agents",
         "commit": Path(".github") / "instructions" / "global-git-commit-instructions.md",
         "copilot": Path(".github") / "copilot-instructions.md",
         "instructions": Path(".github") / "instructions",
-        "prompts": Path(".github") / "prompts",
         "skills": Path(".github") / "skills",
-        "claude_agents": Path(".claude") / "agents",
-        "claude_rules": Path(".claude") / "rules",
     },
 }
 
@@ -32,10 +28,7 @@ def get_source_path(repo_dir: Path, key: str) -> Path:
 
 
 class Asset(StrEnum):
-    AGENTS = "agents"
     SKILLS = "skills"
-    PROMPTS = "prompts"
-    RULES = "rules"
 
 
 class Target(StrEnum):

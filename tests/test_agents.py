@@ -39,7 +39,6 @@ def test_vscode_setup_with_vscode_target(mock_repo_dir, mock_logger, mocker, tmp
     )
 
     mocker.patch.object(VSCodeAgentSetup, "_copy_common_assets")
-    mocker.patch.object(VSCodeAgentSetup, "_copy_agents")
     mocker.patch.object(VSCodeAgentSetup, "cleanup_symlinks")
 
     setup = VSCodeAgentSetup(mock_repo_dir, mock_logger)
@@ -66,7 +65,6 @@ def test_codex_setup_with_codex_target(mock_repo_dir, mock_logger, mocker):
     targets = {Target.CODEX}
 
     mock_common = mocker.patch.object(CodexAgentSetup, "_copy_common_assets")
-    mock_agents = mocker.patch.object(CodexAgentSetup, "_copy_agents")
     mock_special = mocker.patch.object(CodexAgentSetup, "copy_special_files")
     mock_cleanup = mocker.patch.object(CodexAgentSetup, "cleanup_symlinks")
 
@@ -74,7 +72,6 @@ def test_codex_setup_with_codex_target(mock_repo_dir, mock_logger, mocker):
     setup.setup(targets)
 
     mock_common.assert_called_once()
-    mock_agents.assert_called_once()
     mock_special.assert_called_once()
     mock_cleanup.assert_called_once()
 
@@ -96,8 +93,6 @@ def test_claude_setup_with_claude_target(mock_repo_dir, mock_logger, mocker):
     targets = {Target.CLAUDE}
 
     mock_common = mocker.patch.object(ClaudeAgentSetup, "_copy_common_assets")
-    mock_agents = mocker.patch.object(ClaudeAgentSetup, "_copy_agents")
-    mock_rules = mocker.patch.object(ClaudeAgentSetup, "_copy_rules")
     mock_special = mocker.patch.object(ClaudeAgentSetup, "copy_special_files")
     mock_cleanup = mocker.patch.object(ClaudeAgentSetup, "cleanup_symlinks")
 
@@ -105,8 +100,6 @@ def test_claude_setup_with_claude_target(mock_repo_dir, mock_logger, mocker):
     setup.setup(targets)
 
     mock_common.assert_called_once()
-    mock_agents.assert_called_once()
-    mock_rules.assert_called_once()
     mock_special.assert_called_once()
     mock_cleanup.assert_called_once()
 
@@ -129,7 +122,6 @@ def test_intellij_setup_with_intellij_target(mock_repo_dir, mock_logger, mocker)
 
     mock_instructions = mocker.patch.object(IntelliJAgentSetup, "_copy_instructions")
     mock_common = mocker.patch.object(IntelliJAgentSetup, "_copy_common_assets")
-    mock_agents = mocker.patch.object(IntelliJAgentSetup, "_copy_agents")
     mock_cleanup = mocker.patch.object(IntelliJAgentSetup, "cleanup_symlinks")
 
     setup = IntelliJAgentSetup(mock_repo_dir, mock_logger)
@@ -137,7 +129,6 @@ def test_intellij_setup_with_intellij_target(mock_repo_dir, mock_logger, mocker)
 
     mock_instructions.assert_called_once()
     mock_common.assert_called_once()
-    mock_agents.assert_called_once()
     mock_cleanup.assert_called_once()
 
 
